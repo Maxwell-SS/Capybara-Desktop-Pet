@@ -1,28 +1,30 @@
 void framebuffer_size_callback(GLFWwindow* window, int width, int height); 
+void window_pos_callback(GLFWwindow* window, int xpos, int ypos);
 
-int width = 600, height = 600;
+int width, height = 70;
 
 float lastFrame, currentFrame;
 float lastPrint = 0.0f;
+float dt = 0.0f;
 int frameCount = 0;
+
+glm::mat4 projection;
 
 struct Vertex {
 	glm::vec3 position;
 	glm::vec2 texCoord; 
 };
 
+enum CapybaraStates {
+	Walk,
+	Run
+};
+
 class Sprite {
 public:
+	Sprite() {}
     Sprite(GLR::Texture& spriteSheet, glm::vec2 frameSize)
-        : spriteSheet(spriteSheet), frameSize(frameSize) {
-        // Calculate the number of rows and columns in the sprite sheet
-        rows = spriteSheet.getHeight() / static_cast<int>(frameSize.y);
-        cols = spriteSheet.getWidth() / static_cast<int>(frameSize.x);
-
-        currentFrameIndex = 0;
-		numFrames = 5;
-		elapsedTime = 0.0f;
-		frameDuration = 0.1f;
+        : spriteSheet(spriteSheet), frameSize(frameSize), currentFrameIndex(0), numFrames(spriteSheet.getWidth() / frameSize.x), elapsedTime(0.0f), frameDuration(0.1f)  {
 
     	vertices = {
 		    {{ 0.5f,  0.5f, 0.0f}, {1.0f / (float)numFrames, 1.0f}},   // left
@@ -30,24 +32,10 @@ public:
 		    {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},   // top
 		    {{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}    // top
 		};
-		std::vector<unsigned int> indices = {
+		indices = {
 			0, 1, 3,
 			1, 2, 3
 		};
-
-        // Initialize vertex data for a quad
-        // std::vector<float> vertices = {
-        //     // Positions         // Texture Coordinates
-        //     0.5f,  0.5f, 0.0f,   1.0f, 1.0f, // Top Right
-        //     0.5f, -0.5f, 0.0f,   1.0f, 0.0f, // Bottom Right
-        //    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, // Bottom Left
-        //    -0.5f,  0.5f, 0.0f,   0.0f, 1.0f  // Top Left
-        // };
-
-        // std::vector<unsigned int> indices = {
-        //     0, 1, 3, // First Triangle
-        //     1, 2, 3  // Second Triangle
-        // };
 
         // Generate and bind VAO
         glGenVertexArrays(1, &vaoID);
@@ -69,9 +57,6 @@ public:
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
         glEnableVertexAttribArray(1);
 
-        // vao.linkAttribute(0, 3, GL_FLOAT, sizeof(Vertex), offsetof(Vertex, position));
-		// vao.linkAttribute(1, 2, GL_FLOAT, sizeof(Vertex), offsetof(Vertex, texCoord));
-
         // Unbind VAO
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -86,40 +71,14 @@ public:
 
     void update(float deltaTime) {
         elapsedTime += deltaTime;
-        // if (elapsedTime >= 1.0f / animationSpeed) {
-        //     currentFrame = (currentFrame + 1) % numFrames;
-        //     elapsedTime = 0.0f;
-
-        //     // Calculate the texture coordinates for the current frame
-        //     int currentRow = currentFrame / cols;
-        //     int currentCol = currentFrame % cols;
-
-        //     float texLeft = static_cast<float>(currentCol) * frameSize.x / spriteSheet.getWidth();
-        //     float texRight = static_cast<float>(currentCol + 1) * frameSize.x / spriteSheet.getWidth();
-        //     float texTop = static_cast<float>(currentRow) * frameSize.y / spriteSheet.getHeight();
-        //     float texBottom = static_cast<float>(currentRow + 1) * frameSize.y / spriteSheet.getHeight();
-
-        //     std::vector<float> texCoords = {
-        //         texRight, texTop,
-        //         texRight, texBottom,
-        //         texLeft, texBottom,
-        //         texLeft, texTop
-        //     };
-
-        //     // Update the texture coordinates in the VBO
-        //     glBindBuffer(GL_ARRAY_BUFFER, vboID);
-        //     glBufferSubData(GL_ARRAY_BUFFER, 3 * sizeof(float), texCoords.size() * sizeof(float), texCoords.data());
-        //     glBindBuffer(GL_ARRAY_BUFFER, 0);
-        // }
-        ////////////
         if (elapsedTime >= frameDuration) {
 			currentFrameIndex = (currentFrameIndex + 1) % numFrames;
 	        elapsedTime = 0.0f;
 
 	        // Update texture coordinates based on currentFrameIndex
 	        float offset = currentFrameIndex * (1.0f / numFrames);
-	        vertices[0].texCoord = {offset + (1.0f / numFrames), 1.0f}; // Top right
-	        vertices[1].texCoord = {offset + (1.0f / numFrames), 0.0f}; // Bottom right
+	        vertices[0].texCoord = {offset + (1.0f / numFrames), 1.0f};  // Top right
+	        vertices[1].texCoord = {offset + (1.0f / numFrames), 0.0f};  // Bottom right
 	        vertices[2].texCoord = {offset, 0.0f};                       // Bottom left
 	        vertices[3].texCoord = {offset, 1.0f};                       // Top left
 
@@ -130,7 +89,7 @@ public:
 		}
     }
 
-    void draw(GLR::Shader& shader, glm::vec2 scale, glm::vec2 position) {
+    void draw(GLR::Shader& shader) {
     	glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(position, 0.0f));
 		model = glm::scale(model, glm::vec3(scale, 1.0f));
@@ -138,6 +97,7 @@ public:
         shader.bind();
         shader.setInt(std::string("ourTexture"), 0);
         shader.setMatrix4Float("u_model", glm::value_ptr(model));
+        shader.setMatrix4Float("u_projection", glm::value_ptr(projection));
 
 		spriteSheet.bind(0);
 
@@ -149,21 +109,43 @@ public:
         shader.unbind();
     }
 
+    void setPosition(glm::vec2 newPosition) { position = newPosition; }
+    void setScale(glm::vec2 newScale) { scale = newScale; }
+
+    glm::vec2 getPosition() { return position; }
+    glm::vec2 getScale() { return scale; }
+
 private:
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+    GLR::Texture spriteSheet;
+
 	int currentFrameIndex;
 	int numFrames;
 	float elapsedTime;
 	float frameDuration;
 
-	std::vector<Vertex> vertices;
-    GLR::Texture spriteSheet;
+	glm::vec2 position;
+	glm::vec2 scale;
+
     glm::vec2 frameSize;
-    int rows, cols;
     GLuint vaoID, vboID, eboID;
+};
+
+struct Capybara {
+	std::vector<Sprite> sprites;
+	Sprite currentSprite;
+	glm::vec2 position;
 };
 
 int main(int argc, char* argv[]) {
 	glfwInit();
+	// window variables
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+    glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+    glfwWindowHint(GLFW_FLOATING, GLFW_TRUE);
+
 	// using openGL version 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -172,8 +154,12 @@ int main(int argc, char* argv[]) {
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-	
+
+	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	std::cout << mode->width << " | " << mode->height << std::endl;
 	// making glfw window
+	width = mode->width;
+	height = mode->height / 13;
 	GLFWwindow* window = glfwCreateWindow(width, height, "GLare", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -192,6 +178,8 @@ int main(int argc, char* argv[]) {
 	// if window changes size run the call back function
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  
 
+	glfwSetWindowPos(window, 0, 886);
+
 	// enabling the depth buffer
 	// glEnable(GL_DEPTH_TEST);
 	glDisable(GL_DEPTH_TEST);
@@ -200,73 +188,56 @@ int main(int argc, char* argv[]) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	// Animation values
-	float elapsedTime = 0.0f;
-	int currentFrameIndex = 0;
-	int numFrames = 5; // Number of frames in your animation
-	float frameDuration = 0.1f; // Duration of each frame
-
-	std::vector<Vertex> vertices = {
-	    {{ 0.5f,  0.5f, 0.0f}, {1.0f / (float)numFrames, 1.0f}},   // left
-	    {{ 0.5f, -0.5f, 0.0f}, {1.0f / (float)numFrames, 0.0f}},   // right
-	    {{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},   // top
-	    {{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}    // top
-	};
-	std::vector<unsigned int> indices = {
-		0, 1, 3,
-		1, 2, 3
-	};
-
-	GLR::VAO vao;
-	vao.bind();
-
-	GLR::VBO vbo(vertices);
-	GLR::EBO ebo(indices);
-
-	vbo.bind();
-	vao.linkAttribute(0, 3, GL_FLOAT, sizeof(Vertex), offsetof(Vertex, position));
-	vao.linkAttribute(1, 2, GL_FLOAT, sizeof(Vertex), offsetof(Vertex, texCoord));
-	vao.unbind();
-
-	vbo.unbind();
-	ebo.unbind();
-
-	////////
-
-	GLR::VAO avao;
-	avao.bind();
-
-	GLR::VBO avbo(vertices);
-	GLR::EBO aebo(indices);
-
-	avbo.bind();
-	avao.linkAttribute(0, 3, GL_FLOAT, sizeof(Vertex), offsetof(Vertex, position));
-	avao.linkAttribute(1, 2, GL_FLOAT, sizeof(Vertex), offsetof(Vertex, texCoord));
-	avao.unbind();
-
-	avbo.unbind();
-	aebo.unbind();
-
 	GLR::Shader shader(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/shader/test_vert.vert"), std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/shader/test_frag.frag"));
-	GLR::Texture texture(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Run.png"));
-	GLR::Texture texture_run(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Run.png"));
+
 	GLR::Texture texture_walk(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Walk.png"));
+	GLR::Texture texture_run(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Run.png"));
+	GLR::Texture texture_idle(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Idle.png"));
+	GLR::Texture texture_sit(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Sit.png"));
 
-	glm::vec2 position = glm::vec2(-0.5f, 0.0f); // Example position
-	glm::vec2 position_two = glm::vec2(0.5f, 0.0f); // Example position
-	glm::vec2 scale = glm::vec2(0.5f, 0.5f); // Example scale (2x size)
+	Sprite sprite_walk(texture_walk, glm::vec2(32, 32));
+	Sprite sprite_run(texture_run, glm::vec2(32, 32));
+	Sprite sprite_idle(texture_idle, glm::vec2(32, 32));
+	Sprite sprite_sit(texture_sit, glm::vec2(32, 32));
 
-	// Create a 4x4 identity matrix
-	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, glm::vec3(position, 0.0f));
-	model = glm::scale(model, glm::vec3(scale, 1.0f));
+	std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> distrib(-5.0, 5.0);
 
-	glm::mat4 model_two = glm::mat4(1.0f);
-	model_two = glm::translate(model_two, glm::vec3(position_two, 0.0f));
-	model_two = glm::scale(model_two, glm::vec3(scale, 1.0f));
+	int numberOfCapies = 5;
+	std::vector<Capybara> capies;
+	for (int i = 0; i < numberOfCapies; ++i) {
+		Capybara capy;
+
+		capy.sprites.push_back(sprite_walk);
+		capy.sprites.push_back(sprite_run);
+		capy.sprites.push_back(sprite_idle);
+		capy.sprites.push_back(sprite_sit);
+
+		capy.currentSprite = sprite_walk;
+
+		capy.position = glm::vec2(distrib(gen), 0.0f);
+		capy.currentSprite.setScale(glm::vec2(0.5f, 0.5f));
+
+		capies.push_back(capy);
+	}
+
+	glm::vec2 one_position = glm::vec2(-0.2f, 0.0f);
+	glm::vec2 two_position = glm::vec2(0.3f, 0.0f);
 
 	Sprite one(texture_run, glm::vec2(32, 32));
+	one.setPosition(one_position);
+	one.setScale(glm::vec2(0.5f, 0.5f));
+
 	Sprite two(texture_walk, glm::vec2(32, 32));
+	two.setPosition(two_position);
+	two.setScale(glm::vec2(0.5f, 0.5f));
+
+	// aspect ratio
+	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+    float orthoWidth = 10.0f; // Adjust this value to scale your scene
+    float orthoHeight = orthoWidth / aspectRatio;
+    projection = glm::ortho(-orthoWidth / 2, orthoWidth / 2, -orthoHeight / 2, orthoHeight / 2, -1.0f, 1.0f);
 
 	lastFrame = glfwGetTime();
 	while(!glfwWindowShouldClose(window)) {
@@ -274,9 +245,9 @@ int main(int argc, char* argv[]) {
             glfwSetWindowShouldClose(window, true);
 
 		currentFrame = glfwGetTime();
-    	elapsedTime += currentFrame - lastFrame;
     	one.update(currentFrame - lastFrame);
     	two.update(currentFrame - lastFrame);
+    	dt = currentFrame - lastFrame;
     	lastFrame = currentFrame;
 
 		frameCount++;
@@ -286,70 +257,45 @@ int main(int argc, char* argv[]) {
 			lastPrint = currentFrame;
 		}
 
-		if (elapsedTime >= frameDuration) {
-			currentFrameIndex = (currentFrameIndex + 1) % numFrames;
-	        elapsedTime = 0.0f;
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	        // Update texture coordinates based on currentFrameIndex
-	        float offset = currentFrameIndex * (1.0f / numFrames);
-	        vertices[0].texCoord = {offset + (1.0f / numFrames), 1.0f}; // Top right
-	        vertices[1].texCoord = {offset + (1.0f / numFrames), 0.0f}; // Bottom right
-	        vertices[2].texCoord = {offset, 0.0f};                       // Bottom left
-	        vertices[3].texCoord = {offset, 1.0f};                       // Top left
+		for (int i = 0; i < capies.size(); ++i) {
+			capies[i].position.x -= dt * 0.3;
 
-	        // Update VBO with new texture coordinates
-	        vbo.bind();
-	        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
-	        vbo.unbind();
-
-	        avbo.bind();
-	        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
-	        avbo.unbind();
+			if (capies[i].position.x < -5.2) {
+				capies[i].position.x = 5.2;
+			}
 		}
 
-		glClearColor(1.0f, 0.5f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		one_position.x -= dt * 0.6;
+		one.setPosition(one_position);
+
+		two_position.x -= dt * 0.3;
+		two.setPosition(two_position);
+
+		if (one_position.x < -5.2) {
+			one_position.x = 5.2;
+		}
+
+		if (two_position.x < -5.2) {
+			two_position.x = 5.2;
+		}
 
 		// drawing
 		{
-			one.draw(shader, glm::vec2(0.5f, 0.5f), glm::vec2(-0.1f, 0.0f));
-			two.draw(shader, glm::vec2(0.5f, 0.5f), glm::vec2(0.1f, 0.0f));
+			one.draw(shader);
+			two.draw(shader);
 
-			// shader.bind();
-			// shader.setInt(std::string("ourTexture"), 0);
-			// shader.setMatrix4Float("u_model", glm::value_ptr(model));
-			// texture.bind(0);
-
-			// vao.bind();
-			// // glDrawArrays(GL_TRIANGLES, 0, 3);
-			// glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-			// vao.unbind();
-
-			// shader.unbind();
-			// texture.unbind();
-
-			// shader.bind();
-			// shader.setInt(std::string("ourTexture"), 0);
-			// shader.setMatrix4Float("u_model", glm::value_ptr(model_two));
-			// texture.bind(0);
-
-			// avao.bind();
-			// // glDrawArrays(GL_TRIANGLES, 0, 3);
-			// glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-			// avao.unbind();
-
-			// shader.unbind();
-			// texture.unbind();
+			for (int i = 0; i < capies.size(); ++i) {
+				capies[i].currentSprite.setPosition(capies[i].position);;
+				capies[i].currentSprite.draw(shader);
+			}
 		}
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();    
 	}
-
-	vao.destroy();
-	vbo.destroy();
-	shader.destroy();
-	texture.destroy();
 	
 	glfwTerminate();
 	return 0;
@@ -361,4 +307,13 @@ void framebuffer_size_callback(GLFWwindow* window, int newwidth, int newheight) 
 	width = newwidth;
 	height = newheight;
 	glViewport(0, 0, width, height);
+
+	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
+    float orthoWidth = 10.0f; // Adjust this value to scale your scene
+    float orthoHeight = orthoWidth / aspectRatio;
+    projection = glm::ortho(-orthoWidth / 2, orthoWidth / 2, -orthoHeight / 2, orthoHeight / 2, -1.0f, 1.0f);
 }
+
+
+
+

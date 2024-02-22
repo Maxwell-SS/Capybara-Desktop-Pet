@@ -55,6 +55,7 @@
 #include <mutex>
 #include <future>
 #include <mach/mach.h>
+#include <random>
 
 #include "GLare.hpp"
 #include "model.hpp"

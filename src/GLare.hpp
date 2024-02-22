@@ -294,6 +294,9 @@ namespace GLR {
 	public:
 		VAO() { 
 			glGenVertexArrays(1, &ID); 
+			if (ID == 0) {
+		        std::cerr << "Failed to create VAO" << std::endl;
+		    }
 			Debug::checkOpenGLError();
 		}
 		~VAO() { destroy(); }
