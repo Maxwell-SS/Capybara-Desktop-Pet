@@ -57,5 +57,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE tinygltf)
 target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Cocoa")
 target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Quartz")
 
+set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in)
+
 # pch
 # target_precompile_headers(${PROJECT_NAME} PUBLIC src/pch.hpp)

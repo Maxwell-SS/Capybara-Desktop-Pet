@@ -368,9 +368,7 @@ int main(int argc, char* argv[]) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	// Mac os
-#ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
 
 	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 	std::cout << mode->width << " | " << mode->height << std::endl;
@@ -419,14 +417,30 @@ int main(int argc, char* argv[]) {
 	projection = glm::ortho(-orthoWidth / 2, orthoWidth / 2, -orthoHeight / 2, orthoHeight / 2, -1.0f, 1.0f);
 	lastFrame = glfwGetTime();
 
-	#ifdef __OBJC__
+	NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    // Load the PNG image
+    NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"/Users/max/Documents/c++/openGL/WonderEngine/res/icons/image.png"];
+    // Set the image of the status item
+    statusItem.button.image = iconImage;
+    // Optional: Set the image scaling to ensure it fits well in the menu bar
+    statusItem.button.imageScaling = NSImageScaleProportionallyDown;
+    // Create a menu for the status item
+    NSMenu *menu = [[NSMenu alloc] init];
+    // Create a quit menu item
+    NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""];
+    [menu addItem:quitItem];
+    // Assign the menu to the status item
+    statusItem.menu = menu;
+
 	NSWindow* cocoaWindow = glfwGetCocoaWindow(window);
 	if (cocoaWindow)
 	{
+		// if you want the window to appear infront of the dock
+		// [cocoaWindow setLevel:NSStatusWindowLevel];
 	    [cocoaWindow setLevel:NSFloatingWindowLevel];
+	    [cocoaWindow setStyleMask:NSWindowStyleMaskBorderless];
 	    [cocoaWindow setIgnoresMouseEvents:YES];
 	}
-	#endif
 
 	while(!glfwWindowShouldClose(window)) {
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -453,7 +467,7 @@ int main(int argc, char* argv[]) {
 		}
 
 		glfwSwapBuffers(window);
-		glfwPollEvents();    
+		glfwPollEvents();
 	}
 	
 	glfwTerminate();
