@@ -307,6 +307,15 @@ GLFW_LIBRARY_TYPE:STRING=
 //Value Computed by CMake
 GLFW_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw
 
+//Include for OpenGL on OS X
+OPENGL_INCLUDE_DIR:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
+
+//OpenGL library for OS X
+OPENGL_gl_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
+
+//GLU library for OS X (usually same as OpenGL library)
+OPENGL_glu_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
+
 //Value Computed by CMake
 OpenGL_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build
 
@@ -321,6 +330,9 @@ glad_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build/libs/g
 
 //Value Computed by CMake
 glad_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+glad_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
 
 //Value Computed by CMake
 glad_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/glad
@@ -340,6 +352,9 @@ imgui_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build/libs/
 //Value Computed by CMake
 imgui_IS_TOP_LEVEL:STATIC=OFF
 
+//Dependencies for the target
+imgui_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
+
 //Value Computed by CMake
 imgui_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/imgui
 
@@ -348,6 +363,9 @@ tinygltf_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build/li
 
 //Value Computed by CMake
 tinygltf_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+tinygltf_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
 
 //Value Computed by CMake
 tinygltf_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/tinygltf
@@ -530,12 +548,20 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
+//Details about finding OpenGL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework][c ][v()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //GLFW pkg-config Libs.private
 GLFW_PKG_CONFIG_LIBS_PRIVATE:INTERNAL= -framework Cocoa -framework IOKit -framework CoreFoundation
 //GLFW pkg-config Requires.private
 GLFW_PKG_CONFIG_REQUIRES_PRIVATE:INTERNAL=
+//ADVANCED property for variable: OPENGL_INCLUDE_DIR
+OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gl_LIBRARY
+OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glu_LIBRARY
+OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 

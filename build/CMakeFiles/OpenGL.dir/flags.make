@@ -10,9 +10,3 @@ CXX_FLAGSarm64 = -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Cont
 
 CXX_FLAGS = -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0
 
-# PCH options: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch_OPTIONS = -Winvalid-pch;-Xclang;-emit-pch;-Xclang;-include;-Xclang;/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx;-x;c++-header
-
-# PCH options: CMakeFiles/OpenGL.dir/src/main.cpp.o_OPTIONS = -Winvalid-pch;;-Xarch_arm64;-include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx
-
-# PCH options: CMakeFiles/OpenGL.dir/src/model.cpp.o_OPTIONS = -Winvalid-pch;;-Xarch_arm64;-include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx
-

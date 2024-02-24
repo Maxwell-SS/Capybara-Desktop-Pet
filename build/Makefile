@@ -252,68 +252,29 @@ tinygltf/fast:
 	$(MAKE) $(MAKESILENT) -f libs/tinygltf/CMakeFiles/tinygltf.dir/build.make libs/tinygltf/CMakeFiles/tinygltf.dir/build
 .PHONY : tinygltf/fast
 
-# target to build an object file
-cmake_pch_arm64.hxx.pch:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch
-.PHONY : cmake_pch_arm64.hxx.pch
-
-# target to preprocess a source file
-cmake_pch_arm64.hxx.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.i
-.PHONY : cmake_pch_arm64.hxx.i
-
-# target to generate assembly for a file
-cmake_pch_arm64.hxx.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.s
-.PHONY : cmake_pch_arm64.hxx.s
-
-src/main.o: src/main.cpp.o
+src/main.o: src/main.mm.o
 .PHONY : src/main.o
 
 # target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
+src/main.mm.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.o
+.PHONY : src/main.mm.o
 
-src/main.i: src/main.cpp.i
+src/main.i: src/main.mm.i
 .PHONY : src/main.i
 
 # target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
+src/main.mm.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.i
+.PHONY : src/main.mm.i
 
-src/main.s: src/main.cpp.s
+src/main.s: src/main.mm.s
 .PHONY : src/main.s
 
 # target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
-
-src/model.o: src/model.cpp.o
-.PHONY : src/model.o
-
-# target to build an object file
-src/model.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/model.cpp.o
-.PHONY : src/model.cpp.o
-
-src/model.i: src/model.cpp.i
-.PHONY : src/model.i
-
-# target to preprocess a source file
-src/model.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/model.cpp.i
-.PHONY : src/model.cpp.i
-
-src/model.s: src/model.cpp.s
-.PHONY : src/model.s
-
-# target to generate assembly for a file
-src/model.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/model.cpp.s
-.PHONY : src/model.cpp.s
+src/main.mm.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.s
+.PHONY : src/main.mm.s
 
 # Help Target
 help:
@@ -334,15 +295,9 @@ help:
 	@echo "... glfw"
 	@echo "... imgui"
 	@echo "... tinygltf"
-	@echo "... cmake_pch_arm64.hxx.pch"
-	@echo "... cmake_pch_arm64.hxx.i"
-	@echo "... cmake_pch_arm64.hxx.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/model.o"
-	@echo "... src/model.i"
-	@echo "... src/model.s"
 .PHONY : help
 
 

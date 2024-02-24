@@ -14,9 +14,6 @@
 // #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
-// Define "DEBUG" for error checking
-#define DEBUG
-
 namespace GLR {
 	class Debug {
 	public:

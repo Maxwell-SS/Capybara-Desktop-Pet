@@ -69,71 +69,35 @@ include CMakeFiles/OpenGL.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/OpenGL.dir/flags.make
 
-CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch: CMakeFiles/OpenGL.dir/flags.make
-CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.cxx
-CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx
-CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch: CMakeFiles/OpenGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGSarm64) -Winvalid-pch -Xclang -emit-pch -Xclang -include -Xclang /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -x c++-header -MD -MT CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch -MF CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch.d -o CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch -c /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.cxx
+CMakeFiles/OpenGL.dir/src/main.mm.o: CMakeFiles/OpenGL.dir/flags.make
+CMakeFiles/OpenGL.dir/src/main.mm.o: /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm
+CMakeFiles/OpenGL.dir/src/main.mm.o: CMakeFiles/OpenGL.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OpenGL.dir/src/main.mm.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OpenGL.dir/src/main.mm.o -MF CMakeFiles/OpenGL.dir/src/main.mm.o.d -o CMakeFiles/OpenGL.dir/src/main.mm.o -c /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm
 
-CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGSarm64) -Winvalid-pch -Xclang -emit-pch -Xclang -include -Xclang /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -x c++-header -E /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.cxx > CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.i
+CMakeFiles/OpenGL.dir/src/main.mm.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGL.dir/src/main.mm.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm > CMakeFiles/OpenGL.dir/src/main.mm.i
 
-CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGSarm64) -Winvalid-pch -Xclang -emit-pch -Xclang -include -Xclang /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -x c++-header -S /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.cxx -o CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.s
-
-CMakeFiles/OpenGL.dir/src/main.cpp.o: CMakeFiles/OpenGL.dir/flags.make
-CMakeFiles/OpenGL.dir/src/main.cpp.o: /Users/max/Documents/c++/openGL/WonderEngine/src/main.cpp
-CMakeFiles/OpenGL.dir/src/main.cpp.o: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx
-CMakeFiles/OpenGL.dir/src/main.cpp.o: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch
-CMakeFiles/OpenGL.dir/src/main.cpp.o: CMakeFiles/OpenGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/OpenGL.dir/src/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xarch_arm64 -include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -MD -MT CMakeFiles/OpenGL.dir/src/main.cpp.o -MF CMakeFiles/OpenGL.dir/src/main.cpp.o.d -o CMakeFiles/OpenGL.dir/src/main.cpp.o -c /Users/max/Documents/c++/openGL/WonderEngine/src/main.cpp
-
-CMakeFiles/OpenGL.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGL.dir/src/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xarch_arm64 -include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -E /Users/max/Documents/c++/openGL/WonderEngine/src/main.cpp > CMakeFiles/OpenGL.dir/src/main.cpp.i
-
-CMakeFiles/OpenGL.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGL.dir/src/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xarch_arm64 -include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -S /Users/max/Documents/c++/openGL/WonderEngine/src/main.cpp -o CMakeFiles/OpenGL.dir/src/main.cpp.s
-
-CMakeFiles/OpenGL.dir/src/model.cpp.o: CMakeFiles/OpenGL.dir/flags.make
-CMakeFiles/OpenGL.dir/src/model.cpp.o: /Users/max/Documents/c++/openGL/WonderEngine/src/model.cpp
-CMakeFiles/OpenGL.dir/src/model.cpp.o: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx
-CMakeFiles/OpenGL.dir/src/model.cpp.o: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch
-CMakeFiles/OpenGL.dir/src/model.cpp.o: CMakeFiles/OpenGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/OpenGL.dir/src/model.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xarch_arm64 -include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -MD -MT CMakeFiles/OpenGL.dir/src/model.cpp.o -MF CMakeFiles/OpenGL.dir/src/model.cpp.o.d -o CMakeFiles/OpenGL.dir/src/model.cpp.o -c /Users/max/Documents/c++/openGL/WonderEngine/src/model.cpp
-
-CMakeFiles/OpenGL.dir/src/model.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGL.dir/src/model.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xarch_arm64 -include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -E /Users/max/Documents/c++/openGL/WonderEngine/src/model.cpp > CMakeFiles/OpenGL.dir/src/model.cpp.i
-
-CMakeFiles/OpenGL.dir/src/model.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGL.dir/src/model.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Winvalid-pch -Xarch_arm64 -include/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx -S /Users/max/Documents/c++/openGL/WonderEngine/src/model.cpp -o CMakeFiles/OpenGL.dir/src/model.cpp.s
+CMakeFiles/OpenGL.dir/src/main.mm.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGL.dir/src/main.mm.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm -o CMakeFiles/OpenGL.dir/src/main.mm.s
 
 # Object files for target OpenGL
 OpenGL_OBJECTS = \
-"CMakeFiles/OpenGL.dir/src/main.cpp.o" \
-"CMakeFiles/OpenGL.dir/src/model.cpp.o"
+"CMakeFiles/OpenGL.dir/src/main.mm.o"
 
 # External object files for target OpenGL
 OpenGL_EXTERNAL_OBJECTS =
 
-OpenGL: CMakeFiles/OpenGL.dir/cmake_pch_arm64.hxx.pch
-OpenGL: CMakeFiles/OpenGL.dir/src/main.cpp.o
-OpenGL: CMakeFiles/OpenGL.dir/src/model.cpp.o
+OpenGL: CMakeFiles/OpenGL.dir/src/main.mm.o
 OpenGL: CMakeFiles/OpenGL.dir/build.make
 OpenGL: libs/glad/libglad.a
 OpenGL: libs/glfw/src/libglfw3.a
 OpenGL: libs/imgui/libimgui.a
 OpenGL: libs/tinygltf/libtinygltf.a
 OpenGL: CMakeFiles/OpenGL.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable OpenGL"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable OpenGL"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OpenGL.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

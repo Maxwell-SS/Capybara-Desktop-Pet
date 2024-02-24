@@ -41,6 +41,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/Compiler/Clang.cmake"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/Compiler/GNU.cmake"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/FindDoxygen.cmake"
+  "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/FindOpenGL.cmake"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/FindPackageMessage.cmake"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/FindThreads.cmake"

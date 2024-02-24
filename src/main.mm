@@ -1,3 +1,54 @@
+// openGL
+#include <glad/glad.h>
+
+// glfw
+#include <ApplicationServices/ApplicationServices.h>
+#define GLFW_EXPOSE_NATIVE_COCOA
+#define GLFW_EXPOSE_NATIVE_NSGL
+#define GLFW_NATIVE_INCLUDE_NONE
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
+
+// glm
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/rotate_vector.hpp>
+#include <glm/gtx/vector_angle.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/euler_angles.hpp>
+#include <glm/ext.hpp>
+
+// stb
+// #define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
+// std
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <stdlib.h>
+#include <time.h>
+#include <chrono>
+#include <filesystem>
+#include <set>
+#include <thread>
+#include <sstream>
+#include <mutex>
+#include <future>
+#include <mach/mach.h>
+#include <random>
+
+#include "GLare.hpp"
+
+#ifdef __OBJC__
+#define DEBUG 0
+#include <Cocoa/Cocoa.h>
+#endif
+
 int width, height = 70;
 
 float lastFrame, currentFrame;
@@ -366,8 +417,17 @@ int main(int argc, char* argv[]) {
 	float orthoWidth = 10.0f; // Adjust this value to scale your scene
 	float orthoHeight = orthoWidth / aspectRatio;
 	projection = glm::ortho(-orthoWidth / 2, orthoWidth / 2, -orthoHeight / 2, orthoHeight / 2, -1.0f, 1.0f);
-
 	lastFrame = glfwGetTime();
+
+	#ifdef __OBJC__
+	NSWindow* cocoaWindow = glfwGetCocoaWindow(window);
+	if (cocoaWindow)
+	{
+	    [cocoaWindow setLevel:NSFloatingWindowLevel];
+	    [cocoaWindow setIgnoresMouseEvents:YES];
+	}
+	#endif
+
 	while(!glfwWindowShouldClose(window)) {
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);

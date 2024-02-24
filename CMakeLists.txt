@@ -20,14 +20,15 @@ include_directories(
 
 # main files
 set(SOURCE
-	${PROJECT_SOURCE_DIR}/src/main.cpp
+	${PROJECT_SOURCE_DIR}/src/main.mm
 	${PROJECT_SOURCE_DIR}/src/GLare.hpp
-	${PROJECT_SOURCE_DIR}/src/util.hpp
-	${PROJECT_SOURCE_DIR}/src/pch.hpp
-
-	${PROJECT_SOURCE_DIR}/src/model.hpp
-	${PROJECT_SOURCE_DIR}/src/model.cpp
+	# ${PROJECT_SOURCE_DIR}/src/pch.hpp
 )
+
+# opengl
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS})
+link_libraries(${OPENGL_INCLUDE_DIR})
 
 # making main executable
 add_executable(${PROJECT_NAME} ${SOURCE})
@@ -52,5 +53,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE imgui)
 add_subdirectory(libs/tinygltf EXCLUDE_FROM_ALL)
 target_link_libraries(${PROJECT_NAME} PRIVATE tinygltf)
 
+# cocoa
+target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Cocoa")
+target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Quartz")
+
 # pch
-target_precompile_headers(${PROJECT_NAME} PUBLIC src/pch.hpp)
+# target_precompile_headers(${PROJECT_NAME} PUBLIC src/pch.hpp)
