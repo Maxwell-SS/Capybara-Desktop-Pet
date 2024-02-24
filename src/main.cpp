@@ -1,6 +1,3 @@
-void framebuffer_size_callback(GLFWwindow* window, int width, int height); 
-void window_pos_callback(GLFWwindow* window, int xpos, int ypos);
-
 int width, height = 70;
 
 float lastFrame, currentFrame;
@@ -10,12 +7,22 @@ int frameCount = 0;
 
 glm::mat4 projection;
 
-struct Vertex {
-	glm::vec3 position;
-	glm::vec2 texCoord; 
-};
+float getRandomFloat(float lower, float upper) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> distrib(lower, upper);
+	return distrib(gen);
+}
 
-enum CapybaraStates {
+bool getRandomBool() {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 1);
+
+	return dis(gen) == 1;
+}
+
+enum AnimationStates {
 	Walk,
 	Run,
 	Idle,
@@ -23,95 +30,83 @@ enum CapybaraStates {
 	GetUp
 };
 
-float getRandomFloat(float lower, float upper) {
-	std::random_device rd; // Random device to seed the generator
-	std::mt19937 gen(rd()); // Mersenne Twister pseudo-random generator
-	std::uniform_real_distribution<> distrib(lower, upper); // Uniform distribution between lower and upper
-	return distrib(gen); // Return the random number
-}
+struct Vertex {
+	glm::vec3 position;
+	glm::vec2 texCoord; 
+};
 
-bool getRandomBool() {
-	std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(0, 1);
+struct Sprite {
+	GLR::Texture sheet;
+	AnimationStates state;
+	int numberOfFrames;
+	int currentFrameIndex;
+	float frameDuration;
 
-    return dis(gen) == 1;
-}
-
-class Sprite {
-public:
 	Sprite() {}
-	Sprite(GLR::Texture& spriteSheet, glm::vec2 frameSize, float frameDuration)
-		: spriteSheet(spriteSheet), frameSize(frameSize), currentFrameIndex(0), numFrames(spriteSheet.getWidth() / frameSize.x), elapsedTime(0.0f), frameDuration(frameDuration)  {
+	Sprite(GLR::Texture s, AnimationStates as, int n, int c, float f) : sheet(s), state(as), numberOfFrames(n), currentFrameIndex(c), frameDuration(f) {}
+};
 
-		position = glm::vec2(0.0f, 0.0f);
-		scale = glm::vec2(0.5f, 0.5f);
+class Capybara {
+public:
+	Capybara() {}
+	Capybara(glm::vec2 p, glm::vec2 s) : position(p), scale(s), velocity(glm::vec2(0.0f)), targetPosition(glm::vec2(0.0f)) {
+		// loading textures
+		std::string walkFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Walk.png");
+		std::string runFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Run.png");
+		std::string idleFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Idle.png");
+		std::string sitFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Sit.png");
 
+		walk = Sprite(GLR::Texture(walkFile), AnimationStates::Walk, 5, 0, 0.15f);
+		run = Sprite(GLR::Texture(runFile), AnimationStates::Run, 5, 0, 0.1f);
+		idle = Sprite(GLR::Texture(idleFile), AnimationStates::Idle, 5, 0, 0.2f);
+		sit = Sprite(GLR::Texture(sitFile), AnimationStates::Sit, 5, 0, 0.1f);
+		getup = Sprite(GLR::Texture(sitFile), AnimationStates::GetUp, 5, 0, 0.1f);
+
+		// initial state
+		currentSprite = &idle;
+		state = AnimationStates::Idle;
+		stateTimer = 0.0f;
+
+		// animation variables
+		elapsedTime = 0.0f;
+		flipped = getRandomBool();
+
+		// 2d square
 		vertices = {
-			{{ 0.5f,  0.5f, 0.0f}, {1.0f / (float)numFrames, 1.0f}},   // left
-			{{ 0.5f, -0.5f, 0.0f}, {1.0f / (float)numFrames, 0.0f}},   // right
-			{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},   // top
-			{{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}}    // top
+			{{ 0.5f,  0.5f, 0.0f}, {1.0f / (float)currentSprite->numberOfFrames, 1.0f}},
+			{{ 0.5f, -0.5f, 0.0f}, {1.0f / (float)currentSprite->numberOfFrames, 0.0f}},
+			{{-0.5f, -0.5f, 0.0f}, {0.0f, 0.0f}},
+			{{-0.5f,  0.5f, 0.0f}, {0.0f, 1.0f}} 
 		};
 		indices = {
 			0, 1, 3,
 			1, 2, 3
 		};
 
-		// Generate and bind VAO
+		// generate and bind VAO
 		glGenVertexArrays(1, &vaoID);
 		glBindVertexArray(vaoID);
 
-		// Generate and bind VBO
+		// generate and bind VBO
 		glGenBuffers(1, &vboID);
 		glBindBuffer(GL_ARRAY_BUFFER, vboID);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
-		// Generate and bind EBO
+		// generate and bind EBO
 		glGenBuffers(1, &eboID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboID);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
-		// Set vertex attribute pointers
+		// set vertex attribute pointers
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 		glEnableVertexAttribArray(1);
 
-		// Unbind VAO
+		// unbind VAO
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-
-	~Sprite() {
-		glDeleteVertexArrays(1, &vaoID);
-		glDeleteBuffers(1, &vboID);
-		glDeleteBuffers(1, &eboID);
-	}
-
-	void playAnimation(float deltaTime, bool looping = true) {
-		elapsedTime += deltaTime;
-		if (elapsedTime >= frameDuration) {
-			if (looping) {
-				currentFrameIndex = (currentFrameIndex + 1) % numFrames;
-			} else {
-				currentFrameIndex = std::min(currentFrameIndex + 1, numFrames - 1);
-			}
-			updateTextureCoordinates();
-		}
-	}
-
-	void playAnimationReverse(float deltaTime, bool looping = true) {
-		elapsedTime += deltaTime;
-		if (elapsedTime >= frameDuration) {
-			if (looping) {
-				currentFrameIndex = (currentFrameIndex - 1 + numFrames) % numFrames;
-			} else {
-				currentFrameIndex = std::max(currentFrameIndex - 1, 0);
-			}
-			updateTextureCoordinates();
-		}
 	}
 
 	void draw(GLR::Shader& shader) {
@@ -124,185 +119,189 @@ public:
 		shader.setMatrix4Float("u_model", glm::value_ptr(model));
 		shader.setMatrix4Float("u_projection", glm::value_ptr(projection));
 
-		spriteSheet.bind(0);
+		currentSprite->sheet.bind(0);
 
 		glBindVertexArray(vaoID);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
-		spriteSheet.unbind();
+		currentSprite->sheet.unbind();
 		shader.unbind();
 	}
 
-	bool isAnimationFinished() { return currentFrameIndex == numFrames - 1 && elapsedTime >= frameDuration; }
-	float getAnimationDuration() { return numFrames * frameDuration; }
+	void updateTextureCoordinates() {
+	   elapsedTime -= (float)currentSprite->frameDuration;
 
-	void setPosition(glm::vec2 newPosition) { position = newPosition; }
-	void setScale(glm::vec2 newScale) { scale = newScale; }
+		float offset = currentSprite->currentFrameIndex * (1.0f / (float)currentSprite->numberOfFrames);
+		if (flipped) {
+			vertices[0].texCoord = {offset, 1.0f};  // Top left
+			vertices[1].texCoord = {offset, 0.0f};  // Bottom left
+			vertices[2].texCoord = {offset + (1.0f / (float)currentSprite->numberOfFrames), 0.0f};  // Bottom right
+			vertices[3].texCoord = {offset + (1.0f / (float)currentSprite->numberOfFrames), 1.0f};  // Top right
+		} else {
+			vertices[0].texCoord = {offset + (1.0f / (float)currentSprite->numberOfFrames), 1.0f};  // Top right
+			vertices[1].texCoord = {offset + (1.0f / (float)currentSprite->numberOfFrames), 0.0f};  // Bottom right
+			vertices[2].texCoord = {offset, 0.0f};  // Bottom left
+			vertices[3].texCoord = {offset, 1.0f};  // Top left
+		}
 
-	void setCurrentFrameIndex(int index) {
-		currentFrameIndex = index;
-		updateTextureCoordinates();
+		glBindBuffer(GL_ARRAY_BUFFER, vboID);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
-	void flipSprite(bool flip) { 
-		flipped = flip; 
-		updateTextureCoordinates();
+	void playAnimation(float deltaTime, bool looping = true) {
+		elapsedTime += deltaTime;
+		if (elapsedTime >= currentSprite->frameDuration) {
+			if (looping) {
+				currentSprite->currentFrameIndex = (currentSprite->currentFrameIndex + 1) % currentSprite->numberOfFrames;
+			} else {
+				currentSprite->currentFrameIndex = std::min(currentSprite->currentFrameIndex + 1, currentSprite->numberOfFrames - 1);
+			}
+			updateTextureCoordinates();
+		}
 	}
-	bool isSpriteFlipped() { return flipped; }
 
-	int getNumFrames() { return numFrames; }
+	void playAnimationReverse(float deltaTime, bool looping = true) {
+		elapsedTime += deltaTime;
+		if (elapsedTime >= currentSprite->frameDuration) {
+			if (looping) {
+				currentSprite->currentFrameIndex = (currentSprite->currentFrameIndex - 1 + currentSprite->numberOfFrames) % currentSprite->numberOfFrames;
+			} else {
+				currentSprite->currentFrameIndex = std::max(currentSprite->currentFrameIndex - 1, 0);
+			}
+			updateTextureCoordinates();
+		}
+	}
 
-	glm::vec2 getPosition() { return position; }
-	glm::vec2 getScale() { return scale; }
+	void updateState(float deltaTime) {
+		glm::vec2 direction;
+		float nextState;
+
+		stateTimer += deltaTime;
+
+		switch (state) {
+			case AnimationStates::Idle:
+				nextState = getRandomFloat(0.0f, 1.0f);
+				if (stateTimer > getRandomFloat(3.0f, 6.0f)) {
+					if (nextState < 0.2f) { // 20% chance to stay Idle
+						state = AnimationStates::Idle;
+					} 
+					else if (nextState < 0.6f) { // 40% chance to Walk
+						state = AnimationStates::Walk;
+					} 
+					else if (nextState < 0.8f) { // 20% chance to Run
+						state = AnimationStates::Run;
+					} 
+					else { // 20% chance to Sit
+						state = AnimationStates::Sit;
+					}
+					targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
+					stateTimer = 0.0f;
+				}
+				break;
+
+			case AnimationStates::Walk:
+				direction = glm::normalize(targetPosition - position);
+				position += direction * (1.0f * 0.5f) * deltaTime;
+				if (direction.x > 0) {
+					flipped = true;
+				}
+				if (direction.x < 0) {
+					flipped = false;
+				}
+				if (glm::distance(position, targetPosition) < 0.1f) {
+				    float nextState = getRandomFloat(0.0f, 1.0f);
+				    if (nextState < 0.5f) {  // 50% chance to Idle
+				        state = AnimationStates::Idle;
+				    } else if (nextState < 0.7f) {  // 20% chance to Run
+				    	targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
+				        state = AnimationStates::Run;
+				    } else {  // 30% chance to Sit
+				        state = AnimationStates::Sit;
+				    }
+				    stateTimer = 0.0f;
+				}
+				break;
+
+			case AnimationStates::Run:
+				direction = glm::normalize(targetPosition - position);
+				position += direction * (1.0f * 1.0f) * deltaTime;
+				if (direction.x > 0) {
+					flipped = true;
+				}
+				if (direction.x < 0) {
+					flipped = false;
+				}
+				if (glm::distance(position, targetPosition) < 0.1f) {
+					state = AnimationStates::Walk;
+					targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
+					stateTimer = 0.0f;
+				}
+				break;
+
+			case AnimationStates::Sit:
+				if (stateTimer > 3.0f) {
+					state = GetUp;
+					stateTimer = 0.0f;
+				}
+				break;
+
+			case AnimationStates::GetUp:
+				if (stateTimer > 0.5f) {
+					state = Idle;
+					stateTimer = 0.0f;
+				}
+				break;   
+		}
+
+		if (state == Walk) {
+			currentSprite = &walk;
+		}
+		if (state == Run) {
+			currentSprite = &run;
+		}
+		if (state == Idle) {
+			currentSprite = &idle;
+		}
+		if (state == Sit) {
+			currentSprite = &sit;
+		}
+		if (state == GetUp) {
+			currentSprite = &sit;
+		}
+
+		if (state == GetUp) {
+			playAnimationReverse(deltaTime, false);
+		} 
+		else {
+			playAnimation(deltaTime, state != Sit);
+		}
+	}
 
 private:
-	void updateTextureCoordinates() {
-       elapsedTime -= frameDuration;
+	Sprite walk;
+	Sprite run;
+	Sprite idle;
+	Sprite sit;
+	Sprite getup;
 
-        float offset = currentFrameIndex * (1.0f / numFrames);
-        if (flipped) {
-            vertices[0].texCoord = {offset, 1.0f};  // Top left
-            vertices[1].texCoord = {offset, 0.0f};  // Bottom left
-            vertices[2].texCoord = {offset + (1.0f / numFrames), 0.0f};  // Bottom right
-            vertices[3].texCoord = {offset + (1.0f / numFrames), 1.0f};  // Top right
-        } else {
-            vertices[0].texCoord = {offset + (1.0f / numFrames), 1.0f};  // Top right
-            vertices[1].texCoord = {offset + (1.0f / numFrames), 0.0f};  // Bottom right
-            vertices[2].texCoord = {offset, 0.0f};  // Bottom left
-            vertices[3].texCoord = {offset, 1.0f};  // Top left
-        }
+	Sprite* currentSprite;
+	AnimationStates state;
+	float stateTimer;
 
-        glBindBuffer(GL_ARRAY_BUFFER, vboID);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
-	GLR::Texture spriteSheet;
-
-	int currentFrameIndex;
-	int numFrames;
 	float elapsedTime;
-	float frameDuration;
-
 	bool flipped;
 
 	glm::vec2 position;
 	glm::vec2 scale;
-
-	glm::vec2 frameSize;
-	GLuint vaoID, vboID, eboID;
-};
-
-struct Capybara {
-	std::vector<Sprite> sprites;
-	int currentSpriteIndex;
-	glm::vec2 position;
 	glm::vec2 velocity;
 	glm::vec2 targetPosition;
-	CapybaraStates state;
-	float stateTimer;
-	float speed;
-	bool flipped;
 
-	Capybara() : state(Idle), stateTimer(0.0f), speed(1.0f) {}
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
 
-	void updateState(std::vector<Capybara>& capies, float deltaTime) {
-		// Update state timer
-		stateTimer += deltaTime;
-		glm::vec2 direction;
-		float nextState;
-
-		// Check for state transitions
-		switch (state) {
-            case Idle:
-                nextState = getRandomFloat(0.0f, 1.0f);
-		        if (stateTimer > getRandomFloat(3.0f, 6.0f)) {
-		            if (nextState < 0.2f) { // 20% chance to stay Idle
-		                state = Idle;
-		            } else if (nextState < 0.6f) { // 40% chance to Walk
-		                state = Walk;
-		            } else if (nextState < 0.8f) { // 20% chance to Run
-		                state = Run;
-		            } else { // 20% chance to Sit
-		                state = Sit;
-		            }
-		            targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
-		            stateTimer = 0.0f;
-		        }
-		        break;
-            case Walk:
-                direction = glm::normalize(targetPosition - position);
-                position += direction * (speed * 0.5f) * deltaTime;
-
-                if (direction.x > 0) {
-                	flipped = true;
-                }
-                if (direction.x < 0) {
-                	flipped = false;
-                }
-
-                if (glm::distance(position, targetPosition) < 0.1f) {
-                    state = static_cast<CapybaraStates>(int(getRandomFloat(0.0f, 4.0f)));
-                    stateTimer = 0.0f;
-                }
-                break;
-            case Run:
-                direction = glm::normalize(targetPosition - position);
-                position += direction * (speed * 1.0f) * deltaTime;
-
-                if (direction.x > 0) {
-                	flipped = true;
-                }
-                if (direction.x < 0) {
-                	flipped = false;
-                }
-
-                if (glm::distance(position, targetPosition) < 0.1f) {
-                    state = static_cast<CapybaraStates>(int(getRandomFloat(0.0f, 4.0f)));
-                    stateTimer = 0.0f;
-                }
-                break;
-            case Sit:
-                if (stateTimer > 3.0f) {
-                    state = GetUp;
-                    stateTimer = 0.0f;
-                }
-                break;
-            case GetUp:
-                if (stateTimer > 0.5f) {
-                    state = Idle;
-                    stateTimer = 0.0f;
-                }
-                break;
-        }
-
-        // Update the sprite index and animation based on the state
-        // currentSpriteIndex = static_cast<int>(state);
-		if (state == Walk) {
-			currentSpriteIndex = 0;
-		}
-		if (state == Run) {
-			currentSpriteIndex = 1;
-		}
-		if (state == Idle) {
-			currentSpriteIndex = 2;
-		}
-		if (state == Sit) {
-			currentSpriteIndex = 3;
-		}
-		if (state == GetUp) {
-			currentSpriteIndex = 3;
-		}
-
-        if (state == GetUp) {
-            sprites[currentSpriteIndex].playAnimationReverse(deltaTime, false);
-        } else {
-            sprites[currentSpriteIndex].playAnimation(deltaTime, state != Sit);
-        }
-	}
+	GLuint vaoID, vboID, eboID;
 };
 
 int main(int argc, char* argv[]) {
@@ -342,9 +341,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
-	// if window changes size run the call back function
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);  
-
+	// setting position at bottom of screen
 	glfwSetWindowPos(window, 0, 886);
 
 	// enabling the depth buffer
@@ -357,40 +354,12 @@ int main(int argc, char* argv[]) {
 
 	GLR::Shader shader(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/shader/test_vert.vert"), std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/shader/test_frag.frag"));
 
-	GLR::Texture texture_walk(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Walk.png"));
-	GLR::Texture texture_run(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Run.png"));
-	GLR::Texture texture_idle(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Idle.png"));
-	GLR::Texture texture_sit(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Sit.png"));
-
-	int numberOfCapies = 1;
+	int numberOfCapybaras = 1;
 	std::vector<Capybara> capies;
-	for (int i = 0; i < numberOfCapies; ++i) {
-		Capybara capy;
-
-		Sprite sprite_walk(texture_walk, glm::vec2(32, 32), 0.1f);
-		Sprite sprite_run(texture_run, glm::vec2(32, 32), 0.1f);
-		Sprite sprite_idle(texture_idle, glm::vec2(32, 32), 0.2f);
-		Sprite sprite_sit(texture_sit, glm::vec2(32, 32), 0.1f);
-
-		capy.sprites.push_back(sprite_walk);
-		capy.sprites.push_back(sprite_run);
-		capy.sprites.push_back(sprite_idle);
-		capy.sprites.push_back(sprite_sit);
-
-		capy.currentSpriteIndex = 2;
-		capy.state = Idle;
-		capy.position = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
-		capy.stateTimer = static_cast<int>(getRandomFloat(0.0f, 5.0f));
-		capy.flipped = getRandomBool();
-
+	for (int i = 0; i < numberOfCapybaras; ++i) {
+		Capybara capy(glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f), glm::vec2(0.5f, 0.5f));
 		capies.push_back(capy);
 	}
-
-	// when removed program crashes
-	Sprite one(texture_walk, glm::vec2(32, 32), 0.1f);
-	Sprite two(texture_run, glm::vec2(32, 32), 0.1f);
-	Sprite three(texture_idle, glm::vec2(32, 32), 0.1f);
-	Sprite four(texture_sit, glm::vec2(32, 32), 0.1f);
 
 	// aspect ratio
 	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
@@ -414,22 +383,13 @@ int main(int argc, char* argv[]) {
 			lastPrint = currentFrame;
 		}
 
-		for (auto& capy : capies) {
-			capy.updateState(capies, dt);
-		}
-
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// drawing
-		{
-			for (int i = 0; i < capies.size(); ++i) {
-				if (capies[i].sprites[capies[i].currentSpriteIndex].isSpriteFlipped() != capies[i].flipped) {
-					capies[i].sprites[capies[i].currentSpriteIndex].flipSprite(capies[i].flipped);
-				}
-				capies[i].sprites[capies[i].currentSpriteIndex].setPosition(capies[i].position);
-				capies[i].sprites[capies[i].currentSpriteIndex].draw(shader);
-			}
+		for (int i = 0; i < capies.size(); ++i) {
+			capies[i].updateState(dt);
+			capies[i].draw(shader);
 		}
 
 		glfwSwapBuffers(window);
@@ -439,20 +399,3 @@ int main(int argc, char* argv[]) {
 	glfwTerminate();
 	return 0;
 }
-
-// glfw callbacks
-// callback to change viewport size when window size is changed
-void framebuffer_size_callback(GLFWwindow* window, int newwidth, int newheight) {
-	width = newwidth;
-	height = newheight;
-	glViewport(0, 0, width, height);
-
-	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
-	float orthoWidth = 10.0f; // Adjust this value to scale your scene
-	float orthoHeight = orthoWidth / aspectRatio;
-	projection = glm::ortho(-orthoWidth / 2, orthoWidth / 2, -orthoHeight / 2, orthoHeight / 2, -1.0f, 1.0f);
-}
-
-
-
-
