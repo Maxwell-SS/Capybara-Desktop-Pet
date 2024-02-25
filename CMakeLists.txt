@@ -7,22 +7,19 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E rm -rf res)
 
 # copying shaders and resources file into build folder
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/res DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
+# configure_file(Info.plist ${CMAKE_BINARY_DIR}/Info.plist COPYONLY)
 
 include_directories(
 	${PROJECT_SOURCE_DIR}/src
 	${PROJECT_SOURCE_DIR}/libs/glad/include
 	${PROJECT_SOURCE_DIR}/libs/glm/include
-	${PROJECT_SOURCE_DIR}/libs/imgui/include
-	${PROJECT_SOURCE_DIR}/libs/tinygltf/include
 	${PROJECT_SOURCE_DIR}/libs/glfw/include
+	${PROJECT_SOURCE_DIR}/libs/stb/include
 )
 
 # main files
 set(SOURCE
 	${PROJECT_SOURCE_DIR}/src/main.mm
-	${PROJECT_SOURCE_DIR}/src/GLare.hpp
-	# ${PROJECT_SOURCE_DIR}/src/pch.hpp
 )
 
 # opengl
@@ -32,6 +29,9 @@ link_libraries(${OPENGL_INCLUDE_DIR})
 
 # making main executable
 add_executable(${PROJECT_NAME} ${SOURCE})
+# set_target_properties(${PROJECT_NAME} PROPERTIES
+#     MACOSX_BUNDLE_INFO_PLIST ${CMAKE_BINARY_DIR}/Info.plist
+# )
 
 # glad
 add_subdirectory(libs/glad EXCLUDE_FROM_ALL)
@@ -45,19 +45,16 @@ target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 add_subdirectory(libs/glm EXCLUDE_FROM_ALL)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm)
 
-# imgui
-add_subdirectory(libs/imgui EXCLUDE_FROM_ALL)
-target_link_libraries(${PROJECT_NAME} PRIVATE imgui)
-
-# tinygltf
-add_subdirectory(libs/tinygltf EXCLUDE_FROM_ALL)
-target_link_libraries(${PROJECT_NAME} PRIVATE tinygltf)
+# stb
+add_subdirectory(libs/stb EXCLUDE_FROM_ALL)
+target_link_libraries(${PROJECT_NAME} PRIVATE stb)
 
 # cocoa
 target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Cocoa")
 target_link_libraries(${PROJECT_NAME} PRIVATE "-framework Quartz")
 
-set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in)
+# configure_file(Info.plist ${CMAKE_BINARY_DIR}/Info.plist COPYONLY)
+# set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist)
 
 # pch
 # target_precompile_headers(${PROJECT_NAME} PUBLIC src/pch.hpp)

@@ -13,13 +13,13 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/rotate_vector.hpp>
-#include <glm/gtx/vector_angle.hpp>
-#include <glm/gtx/string_cast.hpp>
-#include <glm/gtx/matrix_decompose.hpp>
-#include <glm/gtc/quaternion.hpp>
-#include <glm/gtx/euler_angles.hpp>
-#include <glm/ext.hpp>
+// #include <glm/gtx/rotate_vector.hpp>
+// #include <glm/gtx/vector_angle.hpp>
+// #include <glm/gtx/string_cast.hpp>
+// #include <glm/gtx/matrix_decompose.hpp>
+// #include <glm/gtc/quaternion.hpp>
+// #include <glm/gtx/euler_angles.hpp>
+// #include <glm/ext.hpp>
 
 // stb
 // #define STB_IMAGE_IMPLEMENTATION
@@ -29,27 +29,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream>
-#include <stdlib.h>
-#include <time.h>
-#include <chrono>
-#include <filesystem>
-#include <set>
-#include <thread>
-#include <sstream>
-#include <mutex>
-#include <future>
-#include <mach/mach.h>
 #include <random>
-
-#include "GLare.hpp"
+#include <fstream>
 
 #ifdef __OBJC__
 #define DEBUG 0
 #include <Cocoa/Cocoa.h>
 #endif
 
-int width, height = 70;
+int width, height;
 
 float lastFrame, currentFrame;
 float lastPrint = 0.0f;
@@ -73,6 +61,219 @@ bool getRandomBool() {
 	return dis(gen) == 1;
 }
 
+class Debug {
+public:
+	static void checkOpenGLError() {
+        GLenum error = glGetError();
+        if (error != GL_NO_ERROR) {
+            throw std::runtime_error("OpenGL error occurred: " + std::to_string(error));
+        }
+    }
+};
+class Shader {
+public:
+	Shader() {}
+	Shader(const std::string& vertexFilePath, const std::string& fragmentFilePath) {
+		compile(returnFileContents(vertexFilePath), returnFileContents(fragmentFilePath));
+	}
+	~Shader() { destroy(); }
+
+	void setBool(const std::string& name, bool value) {
+		glUniform1i(getUniformLocation(name), (int)value);
+    	Debug::checkOpenGLError();
+	}
+	void setInt(const std::string& name, int value) {
+		glUniform1i(getUniformLocation(name), (int)value);
+    	Debug::checkOpenGLError();
+	}
+	void setFloat(const std::string& name, float value) {
+		glUniform1f(getUniformLocation(name), value);
+    	Debug::checkOpenGLError();
+	}
+	void setVector2Float(const std::string& name, const float* vec2) {
+		glUniform2fv(getUniformLocation(name), 1, vec2);
+    	Debug::checkOpenGLError();
+	}
+	void setVector3Float(const std::string& name, const float* vec3) {
+		glUniform3fv(getUniformLocation(name), 1, vec3);
+    	Debug::checkOpenGLError();
+	}
+	void setVector4Float(const std::string& name, const float* vec4) {
+		glUniform4fv(getUniformLocation(name), 1, vec4);
+    	Debug::checkOpenGLError();
+	}
+	void setMatrix4Float(const std::string& name, const float* mat4) {
+		glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, mat4);
+    	Debug::checkOpenGLError();
+	}
+
+	void bind() { glUseProgram(ID); }
+	void unbind() { glUseProgram(0); }
+	void destroy() { glDeleteProgram(ID); }
+
+	GLuint getID() const { return ID; }
+
+private:
+	std::string returnFileContents(const std::string& filePath) {
+		std::string contents; // contents for the file
+		std::ifstream file(filePath, std::ios::in);
+
+		// if unable to open file
+		if (!file.is_open()) {
+			std::cout << "error reading | " << filePath << " | Maybe wrong file name." << std::endl;
+			return contents;
+		}
+
+		std::string line = "";
+		while (!file.eof()) {
+			std::getline(file, line);
+			contents.append(line + "\n");
+		}
+
+		file.close();
+		return contents;
+	}
+	void compile(const std::string& vertexContents, const std::string& fragmentContents) {
+		const char* vertexSource = vertexContents.c_str();
+		const char* fragmentSource = fragmentContents.c_str();
+
+		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+		// compiling vertex shader
+		glShaderSource(vertexShader, 1, &vertexSource, NULL);
+		glCompileShader(vertexShader);
+
+		// compiling fragment shader
+		glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
+		glCompileShader(fragmentShader);
+
+		// checking both shaders for errors
+		compileErrorChecking(vertexShader);
+		compileErrorChecking(fragmentShader);
+
+		// linking shaders
+		ID = glCreateProgram();
+		glAttachShader(ID, vertexShader);
+		glAttachShader(ID, fragmentShader);
+		glLinkProgram(ID);
+
+		// deleting shaders
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
+	}
+	void compileErrorChecking(const GLuint& shaderID) {
+		GLint compileStatus;
+		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &compileStatus);
+
+		// if there is an error
+		if (compileStatus != GL_TRUE) {
+			GLint infoLogLenth;
+
+			glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &infoLogLenth);
+			GLchar* buffer = new GLchar[infoLogLenth];
+
+			GLsizei bufferSize;
+			glGetShaderInfoLog(shaderID, infoLogLenth, &bufferSize, buffer);
+
+			std::cout << buffer << std::endl;
+
+			delete [ ] buffer;
+		}
+	}
+	GLint getUniformLocation(const std::string& name) {
+        GLint location = glGetUniformLocation(ID, name.c_str());
+        if (location == -1) {
+            std::cerr << "Warning: Uniform '" << name << "' not found in shader program with ID: " << ID << std::endl;
+        }
+        return location;
+    }
+
+	GLuint ID;
+};
+class Texture {
+public:
+	Texture() : id(0), data(nullptr), width(0), height(0), nrChannels(0) {}
+	Texture(const std::string& filename) : filename(filename), pixelType(GL_UNSIGNED_BYTE) {
+		loadTexture();
+		setFormat();
+		createOpenGLTexture();
+
+		// freeing memory
+		stbi_image_free(data);
+	}
+
+	Texture(int width, int height, GLenum internalFormat, GLenum imageFormat, GLenum pixelType) : width(width), height(height), internalFormat(internalFormat), imageFormat(imageFormat), pixelType(pixelType)  {
+		createOpenGLTexture();
+	}
+
+	void bind(int slot) {
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, id);
+		Debug::checkOpenGLError();
+	}
+	void unbind() {
+		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+	void destroy() {
+		if (id) {
+            glDeleteTextures(1, &id);
+            id = 0;
+        }
+        if (data) {
+            stbi_image_free(data);
+            data = nullptr;
+        }
+	}
+
+	GLuint getID() const { return id; }
+	int getWidth() const { return width; }
+	int getHeight() const { return height; }
+
+private:
+	void loadTexture() {
+		stbi_set_flip_vertically_on_load(true); // flip the texture
+		data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
+		if (!data) {
+			std::cout << "Failed to load image" << std::endl;
+		}
+	}
+	void setFormat() {
+		switch (nrChannels) {
+            case 1: internalFormat = imageFormat = GL_RED; break;
+            case 2: internalFormat = imageFormat = GL_RG; break;
+            case 3: internalFormat = imageFormat = GL_RGB; break;
+            case 4: internalFormat = imageFormat = GL_RGBA; break;
+            default: throw std::runtime_error("Unsupported image format: " + filename);
+        }
+	}
+	void createOpenGLTexture() {
+	    	glGenTextures(1, &id);
+	    	Debug::checkOpenGLError();
+        glBindTexture(GL_TEXTURE_2D, id);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, imageFormat, pixelType, data);
+        Debug::checkOpenGLError();
+
+        glGenerateMipmap(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	std::string filename;
+	unsigned int id;
+	unsigned char *data;
+	int width, height, nrChannels;
+	GLenum internalFormat;
+	GLenum imageFormat;
+	GLenum pixelType;
+};
+
 enum AnimationStates {
 	Walk,
 	Run,
@@ -87,14 +288,14 @@ struct Vertex {
 };
 
 struct Sprite {
-	GLR::Texture sheet;
+	Texture sheet;
 	AnimationStates state;
 	int numberOfFrames;
 	int currentFrameIndex;
 	float frameDuration;
 
 	Sprite() {}
-	Sprite(GLR::Texture s, AnimationStates as, int n, int c, float f) : sheet(s), state(as), numberOfFrames(n), currentFrameIndex(c), frameDuration(f) {}
+	Sprite(Texture s, AnimationStates as, int n, int c, float f) : sheet(s), state(as), numberOfFrames(n), currentFrameIndex(c), frameDuration(f) {}
 };
 
 class Capybara {
@@ -102,16 +303,16 @@ public:
 	Capybara() {}
 	Capybara(glm::vec2 p, glm::vec2 s) : position(p), scale(s), velocity(glm::vec2(0.0f)), targetPosition(glm::vec2(0.0f)) {
 		// loading textures
-		std::string walkFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Walk.png");
-		std::string runFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Run.png");
-		std::string idleFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Idle.png");
-		std::string sitFile = std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/sprites/Capybara_Sit.png");
+		std::string walkFile = std::string("res/sprites/Capybara_Walk.png");
+		std::string runFile = std::string("res/sprites/Capybara_Run.png");
+		std::string idleFile = std::string("res/sprites/Capybara_Idle.png");
+		std::string sitFile = std::string("res/sprites/Capybara_Sit.png");
 
-		walk = Sprite(GLR::Texture(walkFile), AnimationStates::Walk, 5, 0, 0.15f);
-		run = Sprite(GLR::Texture(runFile), AnimationStates::Run, 5, 0, 0.1f);
-		idle = Sprite(GLR::Texture(idleFile), AnimationStates::Idle, 5, 0, 0.2f);
-		sit = Sprite(GLR::Texture(sitFile), AnimationStates::Sit, 5, 0, 0.1f);
-		getup = Sprite(GLR::Texture(sitFile), AnimationStates::GetUp, 5, 0, 0.1f);
+		walk = Sprite(Texture(walkFile), AnimationStates::Walk, 5, 0, 0.15f);
+		run = Sprite(Texture(runFile), AnimationStates::Run, 5, 0, 0.1f);
+		idle = Sprite(Texture(idleFile), AnimationStates::Idle, 5, 0, 0.2f);
+		sit = Sprite(Texture(sitFile), AnimationStates::Sit, 5, 0, 0.1f);
+		getup = Sprite(Texture(sitFile), AnimationStates::GetUp, 5, 0, 0.1f);
 
 		// initial state
 		currentSprite = &idle;
@@ -160,7 +361,7 @@ public:
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 
-	void draw(GLR::Shader& shader) {
+	void draw(Shader& shader) {
 		glm::mat4 model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(position, 0.0f));
 		model = glm::scale(model, glm::vec3(scale, 1.0f));
@@ -390,8 +591,12 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
+	// make it so the app wont show up in the dock or the force quit window
+	[NSApplication sharedApplication];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
+
 	// setting position at bottom of screen
-	glfwSetWindowPos(window, 0, 886);
+	glfwSetWindowPos(window, 0, mode->height - height);
 
 	// enabling the depth buffer
 	// glEnable(GL_DEPTH_TEST);
@@ -401,7 +606,7 @@ int main(int argc, char* argv[]) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	GLR::Shader shader(std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/shader/test_vert.vert"), std::string("/Users/max/Documents/c++/openGL/WonderEngine/res/shader/test_frag.frag"));
+	Shader shader(std::string("res/shader/test_vert.vert"), std::string("res/shader/test_frag.frag"));
 
 	int numberOfCapybaras = 1;
 	std::vector<Capybara> capies;
@@ -419,7 +624,7 @@ int main(int argc, char* argv[]) {
 
 	NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     // Load the PNG image
-    NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"/Users/max/Documents/c++/openGL/WonderEngine/res/icons/image.png"];
+    NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"res/icons/image.png"];
     // Set the image of the status item
     statusItem.button.image = iconImage;
     // Optional: Set the image scaling to ensure it fits well in the menu bar
@@ -440,6 +645,7 @@ int main(int argc, char* argv[]) {
 	    [cocoaWindow setLevel:NSFloatingWindowLevel];
 	    [cocoaWindow setStyleMask:NSWindowStyleMaskBorderless];
 	    [cocoaWindow setIgnoresMouseEvents:YES];
+	    // [cocoaWindow setActivationPolicy:NSApplicationActivationPolicyAccessory];
 	}
 
 	while(!glfwWindowShouldClose(window)) {

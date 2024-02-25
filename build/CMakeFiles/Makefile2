@@ -75,8 +75,7 @@ clean: CMakeFiles/OpenGL.dir/clean
 clean: libs/glad/clean
 clean: libs/glfw/clean
 clean: libs/glm/clean
-clean: libs/imgui/clean
-clean: libs/tinygltf/clean
+clean: libs/stb/clean
 .PHONY : clean
 
 #=============================================================================
@@ -157,34 +156,19 @@ libs/glm/glm/clean:
 .PHONY : libs/glm/glm/clean
 
 #=============================================================================
-# Directory level rules for directory libs/imgui
+# Directory level rules for directory libs/stb
 
 # Recursive "all" directory target.
-libs/imgui/all: libs/imgui/CMakeFiles/imgui.dir/all
-.PHONY : libs/imgui/all
+libs/stb/all: libs/stb/CMakeFiles/stb.dir/all
+.PHONY : libs/stb/all
 
 # Recursive "preinstall" directory target.
-libs/imgui/preinstall:
-.PHONY : libs/imgui/preinstall
+libs/stb/preinstall:
+.PHONY : libs/stb/preinstall
 
 # Recursive "clean" directory target.
-libs/imgui/clean: libs/imgui/CMakeFiles/imgui.dir/clean
-.PHONY : libs/imgui/clean
-
-#=============================================================================
-# Directory level rules for directory libs/tinygltf
-
-# Recursive "all" directory target.
-libs/tinygltf/all: libs/tinygltf/CMakeFiles/tinygltf.dir/all
-.PHONY : libs/tinygltf/all
-
-# Recursive "preinstall" directory target.
-libs/tinygltf/preinstall:
-.PHONY : libs/tinygltf/preinstall
-
-# Recursive "clean" directory target.
-libs/tinygltf/clean: libs/tinygltf/CMakeFiles/tinygltf.dir/clean
-.PHONY : libs/tinygltf/clean
+libs/stb/clean: libs/stb/CMakeFiles/stb.dir/clean
+.PHONY : libs/stb/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/OpenGL.dir
@@ -192,8 +176,7 @@ libs/tinygltf/clean: libs/tinygltf/CMakeFiles/tinygltf.dir/clean
 # All Build rule for target.
 CMakeFiles/OpenGL.dir/all: libs/glad/CMakeFiles/glad.dir/all
 CMakeFiles/OpenGL.dir/all: libs/glfw/src/CMakeFiles/glfw.dir/all
-CMakeFiles/OpenGL.dir/all: libs/imgui/CMakeFiles/imgui.dir/all
-CMakeFiles/OpenGL.dir/all: libs/tinygltf/CMakeFiles/tinygltf.dir/all
+CMakeFiles/OpenGL.dir/all: libs/stb/CMakeFiles/stb.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=1,2 "Built target OpenGL"
@@ -201,7 +184,7 @@ CMakeFiles/OpenGL.dir/all: libs/tinygltf/CMakeFiles/tinygltf.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/OpenGL.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 36
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 28
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/OpenGL.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 0
 .PHONY : CMakeFiles/OpenGL.dir/rule
@@ -300,7 +283,7 @@ libs/glfw/src/CMakeFiles/glfw.dir/clean:
 libs/glfw/src/CMakeFiles/update_mappings.dir/all:
 	$(MAKE) $(MAKESILENT) -f libs/glfw/src/CMakeFiles/update_mappings.dir/build.make libs/glfw/src/CMakeFiles/update_mappings.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs/glfw/src/CMakeFiles/update_mappings.dir/build.make libs/glfw/src/CMakeFiles/update_mappings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=37 "Built target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=29 "Built target update_mappings"
 .PHONY : libs/glfw/src/CMakeFiles/update_mappings.dir/all
 
 # Build rule for subdir invocation for target.
@@ -320,56 +303,30 @@ libs/glfw/src/CMakeFiles/update_mappings.dir/clean:
 .PHONY : libs/glfw/src/CMakeFiles/update_mappings.dir/clean
 
 #=============================================================================
-# Target rules for target libs/imgui/CMakeFiles/imgui.dir
+# Target rules for target libs/stb/CMakeFiles/stb.dir
 
 # All Build rule for target.
-libs/imgui/CMakeFiles/imgui.dir/all:
-	$(MAKE) $(MAKESILENT) -f libs/imgui/CMakeFiles/imgui.dir/build.make libs/imgui/CMakeFiles/imgui.dir/depend
-	$(MAKE) $(MAKESILENT) -f libs/imgui/CMakeFiles/imgui.dir/build.make libs/imgui/CMakeFiles/imgui.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=27,28,29,30,31,32,33,34 "Built target imgui"
-.PHONY : libs/imgui/CMakeFiles/imgui.dir/all
+libs/stb/CMakeFiles/stb.dir/all:
+	$(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/depend
+	$(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=27,28 "Built target stb"
+.PHONY : libs/stb/CMakeFiles/stb.dir/all
 
 # Build rule for subdir invocation for target.
-libs/imgui/CMakeFiles/imgui.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 8
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/imgui/CMakeFiles/imgui.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 0
-.PHONY : libs/imgui/CMakeFiles/imgui.dir/rule
-
-# Convenience name for target.
-imgui: libs/imgui/CMakeFiles/imgui.dir/rule
-.PHONY : imgui
-
-# clean rule for target.
-libs/imgui/CMakeFiles/imgui.dir/clean:
-	$(MAKE) $(MAKESILENT) -f libs/imgui/CMakeFiles/imgui.dir/build.make libs/imgui/CMakeFiles/imgui.dir/clean
-.PHONY : libs/imgui/CMakeFiles/imgui.dir/clean
-
-#=============================================================================
-# Target rules for target libs/tinygltf/CMakeFiles/tinygltf.dir
-
-# All Build rule for target.
-libs/tinygltf/CMakeFiles/tinygltf.dir/all:
-	$(MAKE) $(MAKESILENT) -f libs/tinygltf/CMakeFiles/tinygltf.dir/build.make libs/tinygltf/CMakeFiles/tinygltf.dir/depend
-	$(MAKE) $(MAKESILENT) -f libs/tinygltf/CMakeFiles/tinygltf.dir/build.make libs/tinygltf/CMakeFiles/tinygltf.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=35,36 "Built target tinygltf"
-.PHONY : libs/tinygltf/CMakeFiles/tinygltf.dir/all
-
-# Build rule for subdir invocation for target.
-libs/tinygltf/CMakeFiles/tinygltf.dir/rule: cmake_check_build_system
+libs/stb/CMakeFiles/stb.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/tinygltf/CMakeFiles/tinygltf.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/CMakeFiles/stb.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 0
-.PHONY : libs/tinygltf/CMakeFiles/tinygltf.dir/rule
+.PHONY : libs/stb/CMakeFiles/stb.dir/rule
 
 # Convenience name for target.
-tinygltf: libs/tinygltf/CMakeFiles/tinygltf.dir/rule
-.PHONY : tinygltf
+stb: libs/stb/CMakeFiles/stb.dir/rule
+.PHONY : stb
 
 # clean rule for target.
-libs/tinygltf/CMakeFiles/tinygltf.dir/clean:
-	$(MAKE) $(MAKESILENT) -f libs/tinygltf/CMakeFiles/tinygltf.dir/build.make libs/tinygltf/CMakeFiles/tinygltf.dir/clean
-.PHONY : libs/tinygltf/CMakeFiles/tinygltf.dir/clean
+libs/stb/CMakeFiles/stb.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/clean
+.PHONY : libs/stb/CMakeFiles/stb.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

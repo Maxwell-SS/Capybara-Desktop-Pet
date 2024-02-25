@@ -19,8 +19,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw/src/CMakeLists.txt"
   "/Users/max/Documents/c++/openGL/WonderEngine/libs/glm/CMakeLists.txt"
   "/Users/max/Documents/c++/openGL/WonderEngine/libs/glm/glm/CMakeLists.txt"
-  "/Users/max/Documents/c++/openGL/WonderEngine/libs/imgui/CMakeLists.txt"
-  "/Users/max/Documents/c++/openGL/WonderEngine/libs/tinygltf/CMakeLists.txt"
+  "/Users/max/Documents/c++/openGL/WonderEngine/libs/stb/CMakeLists.txt"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/CMakeCInformation.cmake"
   "/opt/homebrew/Cellar/cmake/3.26.4/share/cmake/Modules/CMakeCXXInformation.cmake"
@@ -76,8 +75,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "libs/glfw/src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "libs/glm/CMakeFiles/CMakeDirectoryInformation.cmake"
   "libs/glm/glm/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "libs/imgui/CMakeFiles/CMakeDirectoryInformation.cmake"
-  "libs/tinygltf/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "libs/stb/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -87,6 +85,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "libs/glfw/CMakeFiles/uninstall.dir/DependInfo.cmake"
   "libs/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
   "libs/glfw/src/CMakeFiles/update_mappings.dir/DependInfo.cmake"
-  "libs/imgui/CMakeFiles/imgui.dir/DependInfo.cmake"
-  "libs/tinygltf/CMakeFiles/tinygltf.dir/DependInfo.cmake"
+  "libs/stb/CMakeFiles/stb.dir/DependInfo.cmake"
   )

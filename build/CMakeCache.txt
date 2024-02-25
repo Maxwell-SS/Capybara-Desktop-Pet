@@ -347,28 +347,16 @@ glm_IS_TOP_LEVEL:STATIC=OFF
 glm_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/glm
 
 //Value Computed by CMake
-imgui_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build/libs/imgui
+stb_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb
 
 //Value Computed by CMake
-imgui_IS_TOP_LEVEL:STATIC=OFF
+stb_IS_TOP_LEVEL:STATIC=OFF
 
 //Dependencies for the target
-imgui_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
+stb_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
 
 //Value Computed by CMake
-imgui_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/imgui
-
-//Value Computed by CMake
-tinygltf_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/build/libs/tinygltf
-
-//Value Computed by CMake
-tinygltf_IS_TOP_LEVEL:STATIC=OFF
-
-//Dependencies for the target
-tinygltf_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
-
-//Value Computed by CMake
-tinygltf_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/tinygltf
+stb_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/WonderEngine/libs/stb
 
 
 ########################
@@ -503,7 +491,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

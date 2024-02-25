@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles /Users/max/Documents/c++/openGL/WonderEngine/build//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb//CMakeFiles/progress.marks
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,120 +148,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named OpenGL
+# Convenience name for target.
+libs/stb/CMakeFiles/stb.dir/rule:
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/CMakeFiles/stb.dir/rule
+.PHONY : libs/stb/CMakeFiles/stb.dir/rule
 
-# Build rule for target.
-OpenGL: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 OpenGL
-.PHONY : OpenGL
-
-# fast build rule for target.
-OpenGL/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/build
-.PHONY : OpenGL/fast
-
-#=============================================================================
-# Target rules for targets named glad
-
-# Build rule for target.
-glad: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glad
-.PHONY : glad
-
-# fast build rule for target.
-glad/fast:
-	$(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/build
-.PHONY : glad/fast
-
-#=============================================================================
-# Target rules for targets named uninstall
-
-# Build rule for target.
-uninstall: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
-.PHONY : uninstall
-
-# fast build rule for target.
-uninstall/fast:
-	$(MAKE) $(MAKESILENT) -f libs/glfw/CMakeFiles/uninstall.dir/build.make libs/glfw/CMakeFiles/uninstall.dir/build
-.PHONY : uninstall/fast
-
-#=============================================================================
-# Target rules for targets named glfw
-
-# Build rule for target.
-glfw: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glfw
-.PHONY : glfw
-
-# fast build rule for target.
-glfw/fast:
-	$(MAKE) $(MAKESILENT) -f libs/glfw/src/CMakeFiles/glfw.dir/build.make libs/glfw/src/CMakeFiles/glfw.dir/build
-.PHONY : glfw/fast
-
-#=============================================================================
-# Target rules for targets named update_mappings
-
-# Build rule for target.
-update_mappings: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 update_mappings
-.PHONY : update_mappings
-
-# fast build rule for target.
-update_mappings/fast:
-	$(MAKE) $(MAKESILENT) -f libs/glfw/src/CMakeFiles/update_mappings.dir/build.make libs/glfw/src/CMakeFiles/update_mappings.dir/build
-.PHONY : update_mappings/fast
-
-#=============================================================================
-# Target rules for targets named stb
-
-# Build rule for target.
-stb: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stb
+# Convenience name for target.
+stb: libs/stb/CMakeFiles/stb.dir/rule
 .PHONY : stb
 
 # fast build rule for target.
 stb/fast:
-	$(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/build
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/build
 .PHONY : stb/fast
 
-src/main.o: src/main.mm.o
-.PHONY : src/main.o
+src/stb.o: src/stb.cpp.o
+.PHONY : src/stb.o
 
 # target to build an object file
-src/main.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.o
-.PHONY : src/main.mm.o
+src/stb.cpp.o:
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o
+.PHONY : src/stb.cpp.o
 
-src/main.i: src/main.mm.i
-.PHONY : src/main.i
+src/stb.i: src/stb.cpp.i
+.PHONY : src/stb.i
 
 # target to preprocess a source file
-src/main.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.i
-.PHONY : src/main.mm.i
+src/stb.cpp.i:
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.i
+.PHONY : src/stb.cpp.i
 
-src/main.s: src/main.mm.s
-.PHONY : src/main.s
+src/stb.s: src/stb.cpp.s
+.PHONY : src/stb.s
 
 # target to generate assembly for a file
-src/main.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.s
-.PHONY : src/main.mm.s
+src/stb.cpp.s:
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.s
+.PHONY : src/stb.cpp.s
 
 # Help Target
 help:
@@ -275,15 +211,10 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... uninstall"
-	@echo "... update_mappings"
-	@echo "... OpenGL"
-	@echo "... glad"
-	@echo "... glfw"
 	@echo "... stb"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
+	@echo "... src/stb.o"
+	@echo "... src/stb.i"
+	@echo "... src/stb.s"
 .PHONY : help
 
 
@@ -295,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

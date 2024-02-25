@@ -94,8 +94,7 @@ OpenGL: CMakeFiles/OpenGL.dir/src/main.mm.o
 OpenGL: CMakeFiles/OpenGL.dir/build.make
 OpenGL: libs/glad/libglad.a
 OpenGL: libs/glfw/src/libglfw3.a
-OpenGL: libs/imgui/libimgui.a
-OpenGL: libs/tinygltf/libtinygltf.a
+OpenGL: libs/stb/libstb.a
 OpenGL: CMakeFiles/OpenGL.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable OpenGL"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OpenGL.dir/link.txt --verbose=$(VERBOSE)

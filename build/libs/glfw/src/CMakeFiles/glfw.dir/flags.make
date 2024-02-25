@@ -4,7 +4,7 @@
 # compile C with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
 C_DEFINES = -D_GLFW_COCOA
 
-C_INCLUDES = -I/Users/max/Documents/c++/openGL/WonderEngine/src -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glad/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glm/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/imgui/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/tinygltf/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw/src -I/Users/max/Documents/c++/openGL/WonderEngine/build/libs/glfw/src
+C_INCLUDES = -I/Users/max/Documents/c++/openGL/WonderEngine/src -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glad/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glm/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/stb/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw/src -I/Users/max/Documents/c++/openGL/WonderEngine/build/libs/glfw/src
 
 C_FLAGSarm64 = -std=c99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -fPIC -Wall
 
