@@ -32,9 +32,32 @@
 #include <random>
 #include <fstream>
 
+// mac os
+#include <CoreFoundation/CoreFoundation.h>
+
+void myCppFunction() {
+    // Your C++ code here
+    std::cout << "C++ code is running!" << std::endl;
+}
+
 #ifdef __OBJC__
 #define DEBUG 0
 #include <Cocoa/Cocoa.h>
+
+@interface CPPFunctionCaller : NSObject
+- (void)callCppFunction;
+@end
+
+@implementation CPPFunctionCaller
+
+- (void)callCppFunction {
+    // Declare the C++ function here, or include a header file where it's declared.
+    // extern "C" void myCppFunction();
+    myCppFunction();
+}
+
+@end
+
 #endif
 
 int width, height;
@@ -45,6 +68,18 @@ float dt = 0.0f;
 int frameCount = 0;
 
 glm::mat4 projection;
+
+std::string getResourcePath() {
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char path[PATH_MAX];
+    if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX)) {
+        // Error handling
+    }
+    CFRelease(resourcesURL);
+
+    return std::string(path);
+}
 
 float getRandomFloat(float lower, float upper) {
 	std::random_device rd;
@@ -303,10 +338,10 @@ public:
 	Capybara() {}
 	Capybara(glm::vec2 p, glm::vec2 s) : position(p), scale(s), velocity(glm::vec2(0.0f)), targetPosition(glm::vec2(0.0f)) {
 		// loading textures
-		std::string walkFile = std::string("res/sprites/Capybara_Walk.png");
-		std::string runFile = std::string("res/sprites/Capybara_Run.png");
-		std::string idleFile = std::string("res/sprites/Capybara_Idle.png");
-		std::string sitFile = std::string("res/sprites/Capybara_Sit.png");
+		std::string walkFile = getResourcePath() + "/res/sprites/Capybara_Walk.png";
+		std::string runFile  = getResourcePath() + "/res/sprites/Capybara_Run.png";
+		std::string idleFile = getResourcePath() + "/res/sprites/Capybara_Idle.png";
+		std::string sitFile  = getResourcePath() + "/res/sprites/Capybara_Sit.png";
 
 		walk = Sprite(Texture(walkFile), AnimationStates::Walk, 5, 0, 0.15f);
 		run = Sprite(Texture(runFile), AnimationStates::Run, 5, 0, 0.1f);
@@ -576,7 +611,7 @@ int main(int argc, char* argv[]) {
 	// making glfw window
 	width = mode->width;
 	height = mode->height / 13;
-	GLFWwindow* window = glfwCreateWindow(width, height, "GLare", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(width, height, "Capybara", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -606,7 +641,7 @@ int main(int argc, char* argv[]) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	Shader shader(std::string("res/shader/test_vert.vert"), std::string("res/shader/test_frag.frag"));
+	Shader shader(std::string(getResourcePath() + "/res/shader/test_vert.vert"), std::string(getResourcePath() + "/res/shader/test_frag.frag"));
 
 	int numberOfCapybaras = 1;
 	std::vector<Capybara> capies;
@@ -617,36 +652,37 @@ int main(int argc, char* argv[]) {
 
 	// aspect ratio
 	float aspectRatio = static_cast<float>(width) / static_cast<float>(height);
-	float orthoWidth = 10.0f; // Adjust this value to scale your scene
+	float orthoWidth = 10.0f; 
 	float orthoHeight = orthoWidth / aspectRatio;
 	projection = glm::ortho(-orthoWidth / 2, orthoWidth / 2, -orthoHeight / 2, orthoHeight / 2, -1.0f, 1.0f);
 	lastFrame = glfwGetTime();
-
-	NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    // Load the PNG image
-    NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"res/icons/image.png"];
-    // Set the image of the status item
-    statusItem.button.image = iconImage;
-    // Optional: Set the image scaling to ensure it fits well in the menu bar
-    statusItem.button.imageScaling = NSImageScaleProportionallyDown;
-    // Create a menu for the status item
-    NSMenu *menu = [[NSMenu alloc] init];
-    // Create a quit menu item
-    NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""];
-    [menu addItem:quitItem];
-    // Assign the menu to the status item
-    statusItem.menu = menu;
 
 	NSWindow* cocoaWindow = glfwGetCocoaWindow(window);
 	if (cocoaWindow)
 	{
 		// if you want the window to appear infront of the dock
 		// [cocoaWindow setLevel:NSStatusWindowLevel];
+		cocoaWindow.collectionBehavior |= NSWindowCollectionBehaviorCanJoinAllSpaces;
 	    [cocoaWindow setLevel:NSFloatingWindowLevel];
 	    [cocoaWindow setStyleMask:NSWindowStyleMaskBorderless];
 	    [cocoaWindow setIgnoresMouseEvents:YES];
-	    // [cocoaWindow setActivationPolicy:NSApplicationActivationPolicyAccessory];
 	}
+
+	NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+    statusItem.button.title = @"^-^";
+    // NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"res/icons/image.png"];
+    // statusItem.button.image = iconImage;
+    // statusItem.button.imageScaling = NSImageScaleProportionallyDown;
+    NSMenu *menu = [[NSMenu alloc] init];
+    NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""];
+    [menu addItem:quitItem];
+
+    CPPFunctionCaller *cppFunctionCaller = [[CPPFunctionCaller alloc] init];
+    NSMenuItem *cppItem = [[NSMenuItem alloc] initWithTitle:@"Run C++ Function" action:@selector(callCppFunction) keyEquivalent:@""];
+    cppItem.target = cppFunctionCaller;
+    [menu addItem:cppItem];
+    
+    statusItem.menu = menu;
 
 	while(!glfwWindowShouldClose(window)) {
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
