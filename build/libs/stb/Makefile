@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.26.4/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/WonderEngine
+CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/WonderEngine/build
+CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb//CMakeFiles/progress.marks
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 0
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb//CMakeFiles/progress.marks
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/clean
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/preinstall
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/preinstall
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 libs/stb/CMakeFiles/stb.dir/rule:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/CMakeFiles/stb.dir/rule
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/stb/CMakeFiles/stb.dir/rule
 .PHONY : libs/stb/CMakeFiles/stb.dir/rule
 
 # Convenience name for target.
@@ -172,7 +172,7 @@ stb: libs/stb/CMakeFiles/stb.dir/rule
 
 # fast build rule for target.
 stb/fast:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/build
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/build
 .PHONY : stb/fast
 
 src/stb.o: src/stb.cpp.o
@@ -180,7 +180,7 @@ src/stb.o: src/stb.cpp.o
 
 # target to build an object file
 src/stb.cpp.o:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o
 .PHONY : src/stb.cpp.o
 
 src/stb.i: src/stb.cpp.i
@@ -188,7 +188,7 @@ src/stb.i: src/stb.cpp.i
 
 # target to preprocess a source file
 src/stb.cpp.i:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.i
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.i
 .PHONY : src/stb.cpp.i
 
 src/stb.s: src/stb.cpp.s
@@ -196,7 +196,7 @@ src/stb.s: src/stb.cpp.s
 
 # target to generate assembly for a file
 src/stb.cpp.s:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.s
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/stb/CMakeFiles/stb.dir/build.make libs/stb/CMakeFiles/stb.dir/src/stb.cpp.s
 .PHONY : src/stb.cpp.s
 
 # Help Target
@@ -226,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

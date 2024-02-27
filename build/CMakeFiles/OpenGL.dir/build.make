@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.26.4/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/WonderEngine
+CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/WonderEngine/build
+CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/OpenGL.dir/depend.make
@@ -69,19 +69,23 @@ include CMakeFiles/OpenGL.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/OpenGL.dir/flags.make
 
+Bundle/OpenGL.app/Contents/Resources/icon.icns: /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/res/icons/icon.icns
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Copying OS X content Bundle/OpenGL.app/Contents/Resources/icon.icns"
+	$(CMAKE_COMMAND) -E copy /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/res/icons/icon.icns Bundle/OpenGL.app/Contents/Resources/icon.icns
+
 CMakeFiles/OpenGL.dir/src/main.mm.o: CMakeFiles/OpenGL.dir/flags.make
-CMakeFiles/OpenGL.dir/src/main.mm.o: /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm
+CMakeFiles/OpenGL.dir/src/main.mm.o: /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src/main.mm
 CMakeFiles/OpenGL.dir/src/main.mm.o: CMakeFiles/OpenGL.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OpenGL.dir/src/main.mm.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OpenGL.dir/src/main.mm.o -MF CMakeFiles/OpenGL.dir/src/main.mm.o.d -o CMakeFiles/OpenGL.dir/src/main.mm.o -c /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OpenGL.dir/src/main.mm.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/OpenGL.dir/src/main.mm.o -MF CMakeFiles/OpenGL.dir/src/main.mm.o.d -o CMakeFiles/OpenGL.dir/src/main.mm.o -c /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src/main.mm
 
 CMakeFiles/OpenGL.dir/src/main.mm.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGL.dir/src/main.mm.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm > CMakeFiles/OpenGL.dir/src/main.mm.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src/main.mm > CMakeFiles/OpenGL.dir/src/main.mm.i
 
 CMakeFiles/OpenGL.dir/src/main.mm.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGL.dir/src/main.mm.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/max/Documents/c++/openGL/WonderEngine/src/main.mm -o CMakeFiles/OpenGL.dir/src/main.mm.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src/main.mm -o CMakeFiles/OpenGL.dir/src/main.mm.s
 
 # Object files for target OpenGL
 OpenGL_OBJECTS = \
@@ -90,17 +94,19 @@ OpenGL_OBJECTS = \
 # External object files for target OpenGL
 OpenGL_EXTERNAL_OBJECTS =
 
-OpenGL: CMakeFiles/OpenGL.dir/src/main.mm.o
-OpenGL: CMakeFiles/OpenGL.dir/build.make
-OpenGL: libs/glad/libglad.a
-OpenGL: libs/glfw/src/libglfw3.a
-OpenGL: libs/stb/libstb.a
-OpenGL: CMakeFiles/OpenGL.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable OpenGL"
+Bundle/OpenGL.app/Contents/MacOS/OpenGL: CMakeFiles/OpenGL.dir/src/main.mm.o
+Bundle/OpenGL.app/Contents/MacOS/OpenGL: CMakeFiles/OpenGL.dir/build.make
+Bundle/OpenGL.app/Contents/MacOS/OpenGL: libs/glad/libglad.a
+Bundle/OpenGL.app/Contents/MacOS/OpenGL: libs/glfw/src/libglfw3.a
+Bundle/OpenGL.app/Contents/MacOS/OpenGL: libs/stb/libstb.a
+Bundle/OpenGL.app/Contents/MacOS/OpenGL: CMakeFiles/OpenGL.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Bundle/OpenGL.app/Contents/MacOS/OpenGL"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OpenGL.dir/link.txt --verbose=$(VERBOSE)
+	/opt/homebrew/Cellar/cmake/3.26.4/bin/cmake -E copy_directory /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/res /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/Bundle/OpenGL.app/Contents/MacOS/../Resources
 
 # Rule to build all files generated by this target.
-CMakeFiles/OpenGL.dir/build: OpenGL
+CMakeFiles/OpenGL.dir/build: Bundle/OpenGL.app/Contents/MacOS/OpenGL
+CMakeFiles/OpenGL.dir/build: Bundle/OpenGL.app/Contents/Resources/icon.icns
 .PHONY : CMakeFiles/OpenGL.dir/build
 
 CMakeFiles/OpenGL.dir/clean:
@@ -108,6 +114,6 @@ CMakeFiles/OpenGL.dir/clean:
 .PHONY : CMakeFiles/OpenGL.dir/clean
 
 CMakeFiles/OpenGL.dir/depend:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/max/Documents/c++/openGL/WonderEngine /Users/max/Documents/c++/openGL/WonderEngine /Users/max/Documents/c++/openGL/WonderEngine/build /Users/max/Documents/c++/openGL/WonderEngine/build /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles/OpenGL.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles/OpenGL.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/OpenGL.dir/depend
 

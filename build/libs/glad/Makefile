@@ -57,10 +57,10 @@ RM = /opt/homebrew/Cellar/cmake/3.26.4/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/WonderEngine
+CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/WonderEngine/build
+CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles /Users/max/Documents/c++/openGL/WonderEngine/build/libs/glad//CMakeFiles/progress.marks
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles 0
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glad//CMakeFiles/progress.marks
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/clean
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/preinstall
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/preinstall
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 libs/glad/CMakeFiles/glad.dir/rule:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/CMakeFiles/glad.dir/rule
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libs/glad/CMakeFiles/glad.dir/rule
 .PHONY : libs/glad/CMakeFiles/glad.dir/rule
 
 # Convenience name for target.
@@ -172,7 +172,7 @@ glad: libs/glad/CMakeFiles/glad.dir/rule
 
 # fast build rule for target.
 glad/fast:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/build
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/build
 .PHONY : glad/fast
 
 src/glad.o: src/glad.c.o
@@ -180,7 +180,7 @@ src/glad.o: src/glad.c.o
 
 # target to build an object file
 src/glad.c.o:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/src/glad.c.o
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/src/glad.c.o
 .PHONY : src/glad.c.o
 
 src/glad.i: src/glad.c.i
@@ -188,7 +188,7 @@ src/glad.i: src/glad.c.i
 
 # target to preprocess a source file
 src/glad.c.i:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/src/glad.c.i
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/src/glad.c.i
 .PHONY : src/glad.c.i
 
 src/glad.s: src/glad.c.s
@@ -196,7 +196,7 @@ src/glad.s: src/glad.c.s
 
 # target to generate assembly for a file
 src/glad.c.s:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/src/glad.c.s
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(MAKE) $(MAKESILENT) -f libs/glad/CMakeFiles/glad.dir/build.make libs/glad/CMakeFiles/glad.dir/src/glad.c.s
 .PHONY : src/glad.c.s
 
 # Help Target
@@ -226,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

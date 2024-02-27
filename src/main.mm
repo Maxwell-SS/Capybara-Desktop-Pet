@@ -65,7 +65,6 @@ int width, height;
 float lastFrame, currentFrame;
 float lastPrint = 0.0f;
 float dt = 0.0f;
-int frameCount = 0;
 
 glm::mat4 projection;
 
@@ -338,10 +337,10 @@ public:
 	Capybara() {}
 	Capybara(glm::vec2 p, glm::vec2 s) : position(p), scale(s), velocity(glm::vec2(0.0f)), targetPosition(glm::vec2(0.0f)) {
 		// loading textures
-		std::string walkFile = getResourcePath() + "/res/sprites/Capybara_Walk.png";
-		std::string runFile  = getResourcePath() + "/res/sprites/Capybara_Run.png";
-		std::string idleFile = getResourcePath() + "/res/sprites/Capybara_Idle.png";
-		std::string sitFile  = getResourcePath() + "/res/sprites/Capybara_Sit.png";
+		std::string walkFile = getResourcePath() + "/sprites/Capybara_Walk.png";
+		std::string runFile  = getResourcePath() + "/sprites/Capybara_Run.png";
+		std::string idleFile = getResourcePath() + "/sprites/Capybara_Idle.png";
+		std::string sitFile  = getResourcePath() + "/sprites/Capybara_Sit.png";
 
 		walk = Sprite(Texture(walkFile), AnimationStates::Walk, 5, 0, 0.15f);
 		run = Sprite(Texture(runFile), AnimationStates::Run, 5, 0, 0.1f);
@@ -641,7 +640,7 @@ int main(int argc, char* argv[]) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	Shader shader(std::string(getResourcePath() + "/res/shader/test_vert.vert"), std::string(getResourcePath() + "/res/shader/test_frag.frag"));
+	Shader shader(std::string(getResourcePath() + "/shader/test_vert.vert"), std::string(getResourcePath() + "/shader/test_frag.frag"));
 
 	int numberOfCapybaras = 1;
 	std::vector<Capybara> capies;
@@ -681,7 +680,12 @@ int main(int argc, char* argv[]) {
     NSMenuItem *cppItem = [[NSMenuItem alloc] initWithTitle:@"Run C++ Function" action:@selector(callCppFunction) keyEquivalent:@""];
     cppItem.target = cppFunctionCaller;
     [menu addItem:cppItem];
-    
+
+    // Submenu for input options
+	NSMenuItem *boolItem = [[NSMenuItem alloc] initWithTitle:@"Bool" action:@selector(selectBool:) keyEquivalent:@""];
+	[boolItem setRepresentedObject:@(NO)]; // Set initial value
+	[menu addItem:boolItem];
+		    
     statusItem.menu = menu;
 
 	while(!glfwWindowShouldClose(window)) {
@@ -691,13 +695,6 @@ int main(int argc, char* argv[]) {
 		currentFrame = glfwGetTime();
 		dt = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-
-		frameCount++;
-		if (currentFrame - lastPrint >= 1.0f) {
-			std::cout << frameCount << std::endl;
-			frameCount = 0;
-			lastPrint = currentFrame;
-		}
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

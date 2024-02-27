@@ -1,4 +1,4 @@
-# Install script for directory: /Users/max/Documents/c++/openGL/WonderEngine/libs/glm
+# Install script for directory: /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Users/max/Documents/c++/openGL/WonderEngine/build/libs/glm/glm/cmake_install.cmake")
+  include("/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glm/glm/cmake_install.cmake")
 
 endif()
 

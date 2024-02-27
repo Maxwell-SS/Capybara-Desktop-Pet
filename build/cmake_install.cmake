@@ -1,4 +1,4 @@
-# Install script for directory: /Users/max/Documents/c++/openGL/WonderEngine
+# Install script for directory: /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/max/Documents/c++/openGL/WonderEngine/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

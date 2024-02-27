@@ -1,9 +1,9 @@
 
-if (NOT EXISTS "/Users/max/Documents/c++/openGL/WonderEngine/build/libs/glfw/install_manifest.txt")
-    message(FATAL_ERROR "Cannot find install manifest: \"/Users/max/Documents/c++/openGL/WonderEngine/build/libs/glfw/install_manifest.txt\"")
+if (NOT EXISTS "/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glfw/install_manifest.txt")
+    message(FATAL_ERROR "Cannot find install manifest: \"/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glfw/install_manifest.txt\"")
 endif()
 
-file(READ "/Users/max/Documents/c++/openGL/WonderEngine/build/libs/glfw/install_manifest.txt" files)
+file(READ "/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glfw/install_manifest.txt" files)
 string(REGEX REPLACE "\n" ";" files "${files}")
 
 foreach (file ${files})

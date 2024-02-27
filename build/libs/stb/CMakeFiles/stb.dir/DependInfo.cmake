@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/max/Documents/c++/openGL/WonderEngine/libs/stb/src/stb.cpp" "libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o" "gcc" "libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o.d"
+  "/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/src/stb.cpp" "libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o" "gcc" "libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

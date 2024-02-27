@@ -53,10 +53,10 @@ RM = /opt/homebrew/Cellar/cmake/3.26.4/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/WonderEngine
+CMAKE_SOURCE_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/WonderEngine/build
+CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 
 # Include any dependencies generated for this target.
 include libs/stb/CMakeFiles/stb.dir/depend.make
@@ -70,18 +70,18 @@ include libs/stb/CMakeFiles/stb.dir/progress.make
 include libs/stb/CMakeFiles/stb.dir/flags.make
 
 libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o: libs/stb/CMakeFiles/stb.dir/flags.make
-libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o: /Users/max/Documents/c++/openGL/WonderEngine/libs/stb/src/stb.cpp
+libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o: /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/src/stb.cpp
 libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o: libs/stb/CMakeFiles/stb.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o"
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o -MF CMakeFiles/stb.dir/src/stb.cpp.o.d -o CMakeFiles/stb.dir/src/stb.cpp.o -c /Users/max/Documents/c++/openGL/WonderEngine/libs/stb/src/stb.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o"
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o -MF CMakeFiles/stb.dir/src/stb.cpp.o.d -o CMakeFiles/stb.dir/src/stb.cpp.o -c /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/src/stb.cpp
 
 libs/stb/CMakeFiles/stb.dir/src/stb.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stb.dir/src/stb.cpp.i"
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/max/Documents/c++/openGL/WonderEngine/libs/stb/src/stb.cpp > CMakeFiles/stb.dir/src/stb.cpp.i
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/src/stb.cpp > CMakeFiles/stb.dir/src/stb.cpp.i
 
 libs/stb/CMakeFiles/stb.dir/src/stb.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stb.dir/src/stb.cpp.s"
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/max/Documents/c++/openGL/WonderEngine/libs/stb/src/stb.cpp -o CMakeFiles/stb.dir/src/stb.cpp.s
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/src/stb.cpp -o CMakeFiles/stb.dir/src/stb.cpp.s
 
 # Object files for target stb
 stb_OBJECTS = \
@@ -93,19 +93,19 @@ stb_EXTERNAL_OBJECTS =
 libs/stb/libstb.a: libs/stb/CMakeFiles/stb.dir/src/stb.cpp.o
 libs/stb/libstb.a: libs/stb/CMakeFiles/stb.dir/build.make
 libs/stb/libstb.a: libs/stb/CMakeFiles/stb.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/WonderEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libstb.a"
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb && $(CMAKE_COMMAND) -P CMakeFiles/stb.dir/cmake_clean_target.cmake
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stb.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libstb.a"
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb && $(CMAKE_COMMAND) -P CMakeFiles/stb.dir/cmake_clean_target.cmake
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stb.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 libs/stb/CMakeFiles/stb.dir/build: libs/stb/libstb.a
 .PHONY : libs/stb/CMakeFiles/stb.dir/build
 
 libs/stb/CMakeFiles/stb.dir/clean:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb && $(CMAKE_COMMAND) -P CMakeFiles/stb.dir/cmake_clean.cmake
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb && $(CMAKE_COMMAND) -P CMakeFiles/stb.dir/cmake_clean.cmake
 .PHONY : libs/stb/CMakeFiles/stb.dir/clean
 
 libs/stb/CMakeFiles/stb.dir/depend:
-	cd /Users/max/Documents/c++/openGL/WonderEngine/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/max/Documents/c++/openGL/WonderEngine /Users/max/Documents/c++/openGL/WonderEngine/libs/stb /Users/max/Documents/c++/openGL/WonderEngine/build /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb /Users/max/Documents/c++/openGL/WonderEngine/build/libs/stb/CMakeFiles/stb.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/stb/CMakeFiles/stb.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : libs/stb/CMakeFiles/stb.dir/depend
 

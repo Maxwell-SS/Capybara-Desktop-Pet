@@ -4,7 +4,7 @@
 # compile CXX with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/max/Documents/c++/openGL/WonderEngine/src -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glad/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glm/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/glfw/include -I/Users/max/Documents/c++/openGL/WonderEngine/libs/stb/include
+CXX_INCLUDES = -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glad/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glm/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glfw/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/include
 
 CXX_FLAGSarm64 = -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0
 
