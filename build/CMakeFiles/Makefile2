@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/OpenGL.dir/all
+all: CMakeFiles/Capybara.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,7 +71,7 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/OpenGL.dir/clean
+clean: CMakeFiles/Capybara.dir/clean
 clean: libs/glad/clean
 clean: libs/glfw/clean
 clean: libs/glm/clean
@@ -171,32 +171,32 @@ libs/stb/clean: libs/stb/CMakeFiles/stb.dir/clean
 .PHONY : libs/stb/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/OpenGL.dir
+# Target rules for target CMakeFiles/Capybara.dir
 
 # All Build rule for target.
-CMakeFiles/OpenGL.dir/all: libs/glad/CMakeFiles/glad.dir/all
-CMakeFiles/OpenGL.dir/all: libs/glfw/src/CMakeFiles/glfw.dir/all
-CMakeFiles/OpenGL.dir/all: libs/stb/CMakeFiles/stb.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles --progress-num=1,2 "Built target OpenGL"
-.PHONY : CMakeFiles/OpenGL.dir/all
+CMakeFiles/Capybara.dir/all: libs/glad/CMakeFiles/glad.dir/all
+CMakeFiles/Capybara.dir/all: libs/glfw/src/CMakeFiles/glfw.dir/all
+CMakeFiles/Capybara.dir/all: libs/stb/CMakeFiles/stb.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles --progress-num=1,2 "Built target Capybara"
+.PHONY : CMakeFiles/Capybara.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/OpenGL.dir/rule: cmake_check_build_system
+CMakeFiles/Capybara.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles 28
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/OpenGL.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Capybara.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles 0
-.PHONY : CMakeFiles/OpenGL.dir/rule
+.PHONY : CMakeFiles/Capybara.dir/rule
 
 # Convenience name for target.
-OpenGL: CMakeFiles/OpenGL.dir/rule
-.PHONY : OpenGL
+Capybara: CMakeFiles/Capybara.dir/rule
+.PHONY : Capybara
 
 # clean rule for target.
-CMakeFiles/OpenGL.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/clean
-.PHONY : CMakeFiles/OpenGL.dir/clean
+CMakeFiles/Capybara.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/clean
+.PHONY : CMakeFiles/Capybara.dir/clean
 
 #=============================================================================
 # Target rules for target libs/glad/CMakeFiles/glad.dir

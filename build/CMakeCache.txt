@@ -197,7 +197,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=OpenGL
+CMAKE_PROJECT_NAME:STATIC=Capybara
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=3.4.0
@@ -275,6 +275,18 @@ CMAKE_STRIP:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/Xcode
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
+
+//Value Computed by CMake
+Capybara_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
+
+//The directory containing a CMake configuration file for Capybara.
+Capybara_DIR:PATH=Capybara_DIR-NOTFOUND
+
+//Value Computed by CMake
+Capybara_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Capybara_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
 
 //Doxygen documentation generation tool (https://www.doxygen.nl)
 DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND

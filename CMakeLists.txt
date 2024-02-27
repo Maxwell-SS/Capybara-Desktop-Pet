@@ -53,7 +53,7 @@
 
 cmake_minimum_required(VERSION 3.2)
 set(CMAKE_CXX_STANDARD 20)
-project(OpenGL)
+project(Capybara)
 
 # Set the output directory for the bundle
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Bundle)

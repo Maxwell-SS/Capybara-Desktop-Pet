@@ -35,9 +35,11 @@
 // mac os
 #include <CoreFoundation/CoreFoundation.h>
 
-void myCppFunction() {
-    // Your C++ code here
-    std::cout << "C++ code is running!" << std::endl;
+// if capybara is enabled to be on all desktops
+bool allDesktops = true;
+
+void AllDesktopsButton() {
+	allDesktops = !allDesktops;
 }
 
 #ifdef __OBJC__
@@ -51,9 +53,7 @@ void myCppFunction() {
 @implementation CPPFunctionCaller
 
 - (void)callCppFunction {
-    // Declare the C++ function here, or include a header file where it's declared.
-    // extern "C" void myCppFunction();
-    myCppFunction();
+	AllDesktopsButton();
 }
 
 @end
@@ -69,15 +69,15 @@ float dt = 0.0f;
 glm::mat4 projection;
 
 std::string getResourcePath() {
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-    char path[PATH_MAX];
-    if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX)) {
-        // Error handling
-    }
-    CFRelease(resourcesURL);
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+	char path[PATH_MAX];
+	if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX)) {
+		// Error handling
+	}
+	CFRelease(resourcesURL);
 
-    return std::string(path);
+	return std::string(path);
 }
 
 float getRandomFloat(float lower, float upper) {
@@ -98,11 +98,11 @@ bool getRandomBool() {
 class Debug {
 public:
 	static void checkOpenGLError() {
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR) {
-            throw std::runtime_error("OpenGL error occurred: " + std::to_string(error));
-        }
-    }
+		GLenum error = glGetError();
+		if (error != GL_NO_ERROR) {
+			throw std::runtime_error("OpenGL error occurred: " + std::to_string(error));
+		}
+	}
 };
 class Shader {
 public:
@@ -114,31 +114,31 @@ public:
 
 	void setBool(const std::string& name, bool value) {
 		glUniform1i(getUniformLocation(name), (int)value);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 	void setInt(const std::string& name, int value) {
 		glUniform1i(getUniformLocation(name), (int)value);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 	void setFloat(const std::string& name, float value) {
 		glUniform1f(getUniformLocation(name), value);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 	void setVector2Float(const std::string& name, const float* vec2) {
 		glUniform2fv(getUniformLocation(name), 1, vec2);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 	void setVector3Float(const std::string& name, const float* vec3) {
 		glUniform3fv(getUniformLocation(name), 1, vec3);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 	void setVector4Float(const std::string& name, const float* vec4) {
 		glUniform4fv(getUniformLocation(name), 1, vec4);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 	void setMatrix4Float(const std::string& name, const float* mat4) {
 		glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, mat4);
-    	Debug::checkOpenGLError();
+		Debug::checkOpenGLError();
 	}
 
 	void bind() { glUseProgram(ID); }
@@ -216,12 +216,12 @@ private:
 		}
 	}
 	GLint getUniformLocation(const std::string& name) {
-        GLint location = glGetUniformLocation(ID, name.c_str());
-        if (location == -1) {
-            std::cerr << "Warning: Uniform '" << name << "' not found in shader program with ID: " << ID << std::endl;
-        }
-        return location;
-    }
+		GLint location = glGetUniformLocation(ID, name.c_str());
+		if (location == -1) {
+			std::cerr << "Warning: Uniform '" << name << "' not found in shader program with ID: " << ID << std::endl;
+		}
+		return location;
+	}
 
 	GLuint ID;
 };
@@ -251,13 +251,13 @@ public:
 	}
 	void destroy() {
 		if (id) {
-            glDeleteTextures(1, &id);
-            id = 0;
-        }
-        if (data) {
-            stbi_image_free(data);
-            data = nullptr;
-        }
+			glDeleteTextures(1, &id);
+			id = 0;
+		}
+		if (data) {
+			stbi_image_free(data);
+			data = nullptr;
+		}
 	}
 
 	GLuint getID() const { return id; }
@@ -274,29 +274,29 @@ private:
 	}
 	void setFormat() {
 		switch (nrChannels) {
-            case 1: internalFormat = imageFormat = GL_RED; break;
-            case 2: internalFormat = imageFormat = GL_RG; break;
-            case 3: internalFormat = imageFormat = GL_RGB; break;
-            case 4: internalFormat = imageFormat = GL_RGBA; break;
-            default: throw std::runtime_error("Unsupported image format: " + filename);
-        }
+			case 1: internalFormat = imageFormat = GL_RED; break;
+			case 2: internalFormat = imageFormat = GL_RG; break;
+			case 3: internalFormat = imageFormat = GL_RGB; break;
+			case 4: internalFormat = imageFormat = GL_RGBA; break;
+			default: throw std::runtime_error("Unsupported image format: " + filename);
+		}
 	}
 	void createOpenGLTexture() {
-	    	glGenTextures(1, &id);
-	    	Debug::checkOpenGLError();
-        glBindTexture(GL_TEXTURE_2D, id);
+			glGenTextures(1, &id);
+			Debug::checkOpenGLError();
+		glBindTexture(GL_TEXTURE_2D, id);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, imageFormat, pixelType, data);
-        Debug::checkOpenGLError();
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, imageFormat, pixelType, data);
+		Debug::checkOpenGLError();
 
-        glGenerateMipmap(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, 0);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	std::string filename;
@@ -497,16 +497,16 @@ public:
 					flipped = false;
 				}
 				if (glm::distance(position, targetPosition) < 0.1f) {
-				    float nextState = getRandomFloat(0.0f, 1.0f);
-				    if (nextState < 0.5f) {  // 50% chance to Idle
-				        state = AnimationStates::Idle;
-				    } else if (nextState < 0.7f) {  // 20% chance to Run
-				    	targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
-				        state = AnimationStates::Run;
-				    } else {  // 30% chance to Sit
-				        state = AnimationStates::Sit;
-				    }
-				    stateTimer = 0.0f;
+					float nextState = getRandomFloat(0.0f, 1.0f);
+					if (nextState < 0.5f) {  // 50% chance to Idle
+						state = AnimationStates::Idle;
+					} else if (nextState < 0.7f) {  // 20% chance to Run
+						targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
+						state = AnimationStates::Run;
+					} else {  // 30% chance to Sit
+						state = AnimationStates::Sit;
+					}
+					stateTimer = 0.0f;
 				}
 				break;
 
@@ -606,7 +606,7 @@ int main(int argc, char* argv[]) {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	const GLFWvidmode * mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-	std::cout << mode->width << " | " << mode->height << std::endl;
+
 	// making glfw window
 	width = mode->width;
 	height = mode->height / 13;
@@ -627,7 +627,7 @@ int main(int argc, char* argv[]) {
 
 	// make it so the app wont show up in the dock or the force quit window
 	[NSApplication sharedApplication];
-    [NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
+	[NSApp setActivationPolicy:NSApplicationActivationPolicyAccessory];
 
 	// setting position at bottom of screen
 	glfwSetWindowPos(window, 0, mode->height - height);
@@ -661,32 +661,34 @@ int main(int argc, char* argv[]) {
 	{
 		// if you want the window to appear infront of the dock
 		// [cocoaWindow setLevel:NSStatusWindowLevel];
-		cocoaWindow.collectionBehavior |= NSWindowCollectionBehaviorCanJoinAllSpaces;
-	    [cocoaWindow setLevel:NSFloatingWindowLevel];
-	    [cocoaWindow setStyleMask:NSWindowStyleMaskBorderless];
-	    [cocoaWindow setIgnoresMouseEvents:YES];
+
+		[cocoaWindow setLevel:NSFloatingWindowLevel];
+		[cocoaWindow setStyleMask:NSWindowStyleMaskBorderless];
+		[cocoaWindow setIgnoresMouseEvents:YES];
 	}
 
 	NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    statusItem.button.title = @"^-^";
-    // NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"res/icons/image.png"];
-    // statusItem.button.image = iconImage;
-    // statusItem.button.imageScaling = NSImageScaleProportionallyDown;
-    NSMenu *menu = [[NSMenu alloc] init];
-    NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""];
-    [menu addItem:quitItem];
+	statusItem.button.title = @"^-^";
+	// NSImage *iconImage = [[NSImage alloc] initWithContentsOfFile:@"res/icons/image.png"];
+	// statusItem.button.image = iconImage;
+	// statusItem.button.imageScaling = NSImageScaleProportionallyDown;
 
-    CPPFunctionCaller *cppFunctionCaller = [[CPPFunctionCaller alloc] init];
-    NSMenuItem *cppItem = [[NSMenuItem alloc] initWithTitle:@"Run C++ Function" action:@selector(callCppFunction) keyEquivalent:@""];
-    cppItem.target = cppFunctionCaller;
-    [menu addItem:cppItem];
+	// CPPFunctionCaller *cppFunctionCaller = [[CPPFunctionCaller alloc] init];
+	// NSMenuItem *cppItem = [[NSMenuItem alloc] initWithTitle:@"Run C++ Function" action:nil keyEquivalent:@""];
+	// cppItem.enabled = NO;
+	// [menu addItem:cppItem];
 
-    // Submenu for input options
-	NSMenuItem *boolItem = [[NSMenuItem alloc] initWithTitle:@"Bool" action:@selector(selectBool:) keyEquivalent:@""];
-	[boolItem setRepresentedObject:@(NO)]; // Set initial value
-	[menu addItem:boolItem];
-		    
-    statusItem.menu = menu;
+	NSMenu *menu = [[NSMenu alloc] init];
+
+	CPPFunctionCaller *cppFunctionCaller = [[CPPFunctionCaller alloc] init];
+	NSMenuItem *cppItem = [[NSMenuItem alloc] initWithTitle:@"All Desktops" action:@selector(callCppFunction) keyEquivalent:@""];
+	cppItem.target = cppFunctionCaller;
+	[menu addItem:cppItem];
+
+	NSMenuItem *quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(terminate:) keyEquivalent:@""];
+	[menu addItem:quitItem];
+			
+	statusItem.menu = menu;
 
 	while(!glfwWindowShouldClose(window)) {
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -707,6 +709,13 @@ int main(int argc, char* argv[]) {
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		if (allDesktops) {
+			cocoaWindow.collectionBehavior |= NSWindowCollectionBehaviorCanJoinAllSpaces;
+		}
+		else {
+			cocoaWindow.collectionBehavior &= ~NSWindowCollectionBehaviorCanJoinAllSpaces;
+		}
 	}
 	
 	glfwTerminate();

@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named OpenGL
+# Target rules for targets named Capybara
 
 # Build rule for target.
-OpenGL: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 OpenGL
-.PHONY : OpenGL
+Capybara: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Capybara
+.PHONY : Capybara
 
 # fast build rule for target.
-OpenGL/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/build
-.PHONY : OpenGL/fast
+Capybara/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/build
+.PHONY : Capybara/fast
 
 #=============================================================================
 # Target rules for targets named glad
@@ -244,7 +244,7 @@ src/main.o: src/main.mm.o
 
 # target to build an object file
 src/main.mm.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/src/main.mm.o
 .PHONY : src/main.mm.o
 
 src/main.i: src/main.mm.i
@@ -252,7 +252,7 @@ src/main.i: src/main.mm.i
 
 # target to preprocess a source file
 src/main.mm.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/src/main.mm.i
 .PHONY : src/main.mm.i
 
 src/main.s: src/main.mm.s
@@ -260,7 +260,7 @@ src/main.s: src/main.mm.s
 
 # target to generate assembly for a file
 src/main.mm.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/OpenGL.dir/build.make CMakeFiles/OpenGL.dir/src/main.mm.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Capybara.dir/build.make CMakeFiles/Capybara.dir/src/main.mm.s
 .PHONY : src/main.mm.s
 
 # Help Target
@@ -277,7 +277,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... uninstall"
 	@echo "... update_mappings"
-	@echo "... OpenGL"
+	@echo "... Capybara"
 	@echo "... glad"
 	@echo "... glfw"
 	@echo "... stb"

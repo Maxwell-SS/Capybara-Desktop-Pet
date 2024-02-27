@@ -1,4 +1,4 @@
-/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles/OpenGL.dir
+/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles/Capybara.dir
 /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles/edit_cache.dir
 /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles/rebuild_cache.dir
 /Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/CMakeFiles/list_install_components.dir

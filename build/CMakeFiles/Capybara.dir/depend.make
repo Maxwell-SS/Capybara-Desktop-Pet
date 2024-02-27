@@ -1,2 +1,2 @@
-# Empty dependencies file for OpenGL.
+# Empty dependencies file for Capybara.
 # This may be replaced when dependencies are built.
