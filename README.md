@@ -1,26 +1,34 @@
 <div align="center">
-  <a href="[https://github.com/othneildrew/Best-README-Template](https://github.com/Maxwell-SS/Capybara-Desktop-Pet.git)">
+  <a href="https://github.com/Maxwell-SS/Capybara-Desktop-Pet">
     <img src="res/readme/icon.png" alt="Logo" width="80" height="80">
   </a>
 
   <h1 align="center">Capybara Desktop Pet</h1>
 
   <p align="center">
-    A Capybara desktop companion
+    A charming pixel art Capybara companion
   </p>
 </div>
 
 ## Showcase
+<div align="center">
+  <img src="res/readme/showcase.gif" alt="Capybara Running">
+</div>
 
-![Capybara Running](res/readme/lowres.gif)
+## About The Project
+A small pixel art capybara that scurries around the bottom of your screen! It isnt interactive and does not block mouse clicks. It is made with C++, Objective-C, and uses OpenGL, GLFW, GLM, and STB. 
 
-## About
-A simple pixel art capybara that runs around at the bottom of your screen, its not interactable and doesnt block mouse clicks. Its made with c++ some objective-c and uses opengl, glfw, glm and stb. 
-### Note
-This only works on Mac os
+**Note:** This application is compatible with macOS only.
 
-## Install
-### Building
+## Getting Started
+
+### Prerequisites
+Ensure you have `cmake` and `make` installed on your machine.
+
+### Installation
+
+#### Building from Source
+To build the application from source:
 ```sh
 git clone https://github.com/Maxwell-SS/Capybara-Desktop-Pet.git
 cd Capybara-Desktop-Pet
@@ -30,30 +38,31 @@ cmake ..
 make
 ./Capybara
 ```
-If you want to build your own .app then you can replace 
-```sh
-cmake ..
-```
-with 
+To build a .app bundle use:
 ```sh
 cmake .. -DBUILD_BUNDLE=ON
 ```
-This will generate a bundle folder with the .app inside of it
+This generates a bundle folder containing the .app.
 
-### Downloading dmg
-1. Go to the releases and download the dmg
-2. Open the dmg and drag the app to your Applications folder
-   
-If you try and run the app you will get an error saying that it is damaged, so you have to run these 3 commands to fix it
+#### Downloading the DMG
+1. Navigate to [releases](https://github.com/Maxwell-SS/Capybara-Desktop-Pet/releases).
+2. Download the latest DMG file.
+3. Open the DMG and drag the application to your Applications folder.
+
+#### Resolving macOS Security Restrictions
+If you encounter a security error stating the application is damaged:
+Open a terminal and run these three commands.
 ```sh
 sudo spctl --master-disable
 xattr -cr /Applications/Capybara.app
 sudo spctl --master-enable
 ```
 
-## Useage
-Once you run the application you will see a new widget appear in the top right of your screen.
-This is used to quit the capybara app and also toggle whether it apears on one desktop or all.
+## Usage
+Upon running the application, a widget will appear in the top right of your screen. This widget allows you to quit the capybara or toggle its visibility across all desktops.
 
-## Credit
-Pixel Art: https://rainloaf.itch.io/capybara-sprite-sheet
+## Credits
+Pixel Art by [Rainloaf](https://rainloaf.itch.io/capybara-sprite-sheet)
+
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
