@@ -6,7 +6,7 @@ C_DEFINES = -D_GLFW_COCOA
 
 C_INCLUDES = -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glad/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glm/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glfw/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glfw/src -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glfw/src
 
-C_FLAGSarm64 = -std=c99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -fPIC -Wall
+C_FLAGSarm64 = -std=c99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fPIC -Wall
 
-C_FLAGS = -std=c99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0 -fPIC -Wall
+C_FLAGS = -std=c99 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk -fPIC -Wall
 

@@ -1,0 +1,1 @@
+create-dmg --window-size 640 360 --background /Users/max/Desktop/small-background.png --icon Capybara 126 160 --app-drop-link 515 160 ~/Desktop/capy.dmg '/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/Bundle/Capybara.app'

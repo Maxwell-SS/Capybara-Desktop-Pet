@@ -337,10 +337,10 @@ public:
 	Capybara() {}
 	Capybara(glm::vec2 p, glm::vec2 s) : position(p), scale(s), velocity(glm::vec2(0.0f)), targetPosition(glm::vec2(0.0f)) {
 		// loading textures
-		std::string walkFile = getResourcePath() + "/sprites/Capybara_Walk.png";
-		std::string runFile  = getResourcePath() + "/sprites/Capybara_Run.png";
-		std::string idleFile = getResourcePath() + "/sprites/Capybara_Idle.png";
-		std::string sitFile  = getResourcePath() + "/sprites/Capybara_Sit.png";
+		std::string walkFile = getResourcePath() + "/res/sprites/Capybara_Walk.png";
+		std::string runFile  = getResourcePath() + "/res/sprites/Capybara_Run.png";
+		std::string idleFile = getResourcePath() + "/res/sprites/Capybara_Idle.png";
+		std::string sitFile  = getResourcePath() + "/res/sprites/Capybara_Sit.png";
 
 		walk = Sprite(Texture(walkFile), AnimationStates::Walk, 5, 0, 0.15f);
 		run = Sprite(Texture(runFile), AnimationStates::Run, 5, 0, 0.1f);
@@ -441,7 +441,8 @@ public:
 		if (elapsedTime >= currentSprite->frameDuration) {
 			if (looping) {
 				currentSprite->currentFrameIndex = (currentSprite->currentFrameIndex + 1) % currentSprite->numberOfFrames;
-			} else {
+			} 
+			else {
 				currentSprite->currentFrameIndex = std::min(currentSprite->currentFrameIndex + 1, currentSprite->numberOfFrames - 1);
 			}
 			updateTextureCoordinates();
@@ -453,7 +454,8 @@ public:
 		if (elapsedTime >= currentSprite->frameDuration) {
 			if (looping) {
 				currentSprite->currentFrameIndex = (currentSprite->currentFrameIndex - 1 + currentSprite->numberOfFrames) % currentSprite->numberOfFrames;
-			} else {
+			} 
+			else {
 				currentSprite->currentFrameIndex = std::max(currentSprite->currentFrameIndex - 1, 0);
 			}
 			updateTextureCoordinates();
@@ -470,16 +472,16 @@ public:
 			case AnimationStates::Idle:
 				nextState = getRandomFloat(0.0f, 1.0f);
 				if (stateTimer > getRandomFloat(3.0f, 6.0f)) {
-					if (nextState < 0.2f) { // 20% chance to stay Idle
+					if (nextState < 0.2f) {
 						state = AnimationStates::Idle;
 					} 
-					else if (nextState < 0.6f) { // 40% chance to Walk
+					else if (nextState < 0.6f) {
 						state = AnimationStates::Walk;
 					} 
-					else if (nextState < 0.8f) { // 20% chance to Run
+					else if (nextState < 0.8f) {
 						state = AnimationStates::Run;
 					} 
-					else { // 20% chance to Sit
+					else {
 						state = AnimationStates::Sit;
 					}
 					targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
@@ -498,12 +500,14 @@ public:
 				}
 				if (glm::distance(position, targetPosition) < 0.1f) {
 					float nextState = getRandomFloat(0.0f, 1.0f);
-					if (nextState < 0.5f) {  // 50% chance to Idle
+					if (nextState < 0.5f) {
 						state = AnimationStates::Idle;
-					} else if (nextState < 0.7f) {  // 20% chance to Run
+					} 
+					else if (nextState < 0.7f) {
 						targetPosition = glm::vec2(getRandomFloat(-5.0f, 5.0f), 0.0f);
 						state = AnimationStates::Run;
-					} else {  // 30% chance to Sit
+					} 
+					else {
 						state = AnimationStates::Sit;
 					}
 					stateTimer = 0.0f;
@@ -633,14 +637,13 @@ int main(int argc, char* argv[]) {
 	glfwSetWindowPos(window, 0, mode->height - height);
 
 	// enabling the depth buffer
-	// glEnable(GL_DEPTH_TEST);
 	glDisable(GL_DEPTH_TEST);
 
 	// Making png's see through
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	Shader shader(std::string(getResourcePath() + "/shader/test_vert.vert"), std::string(getResourcePath() + "/shader/test_frag.frag"));
+	Shader shader(std::string(getResourcePath() + "/res/shader/vert.vert"), std::string(getResourcePath() + "/res/shader/frag.frag"));
 
 	int numberOfCapybaras = 1;
 	std::vector<Capybara> capies;
@@ -659,7 +662,7 @@ int main(int argc, char* argv[]) {
 	NSWindow* cocoaWindow = glfwGetCocoaWindow(window);
 	if (cocoaWindow)
 	{
-		// if you want the window to appear infront of the dock
+		// if you want the window to appear infront of the dock uncomment this
 		// [cocoaWindow setLevel:NSStatusWindowLevel];
 
 		[cocoaWindow setLevel:NSFloatingWindowLevel];

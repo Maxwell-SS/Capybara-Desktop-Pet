@@ -60,7 +60,7 @@ add_library(glfw STATIC IMPORTED)
 
 set_target_properties(glfw PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-  INTERFACE_LINK_LIBRARIES "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;\$<LINK_ONLY:Threads::Threads>;-framework Cocoa;-framework IOKit;-framework CoreFoundation"
+  INTERFACE_LINK_LIBRARIES "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework;\$<LINK_ONLY:Threads::Threads>;-framework Cocoa;-framework IOKit;-framework CoreFoundation"
 )
 
 # Load information for each installed configuration.

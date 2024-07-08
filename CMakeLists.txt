@@ -3,7 +3,7 @@
 # project(OpenGL)
 
 # # delete folders
-# execute_process(COMMAND ${CMAKE_COMMAND} -E rm -rf res)
+# # execute_process(COMMAND ${CMAKE_COMMAND} -E rm -rf res)
 
 # # copying shaders and resources file into build folder
 # file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/res DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -127,5 +127,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_CURRENT_SOURCE_DIR}/res
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>/../Resources
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>/../Resources/res
 )

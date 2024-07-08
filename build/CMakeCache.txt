@@ -184,11 +184,11 @@ CMAKE_OSX_ARCHITECTURES:STRING=
 
 //Minimum OS X version to target for deployment (at runtime); newer
 // APIs weak linked. Set to empty string for default value.
-CMAKE_OSX_DEPLOYMENT_TARGET:STRING=13.0
+CMAKE_OSX_DEPLOYMENT_TARGET:STRING=
 
 //The product will be built against the headers and libraries located
 // inside the indicated SDK.
-CMAKE_OSX_SYSROOT:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk
+CMAKE_OSX_SYSROOT:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -279,9 +279,6 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 //Value Computed by CMake
 Capybara_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 
-//The directory containing a CMake configuration file for Capybara.
-Capybara_DIR:PATH=Capybara_DIR-NOTFOUND
-
 //Value Computed by CMake
 Capybara_IS_TOP_LEVEL:STATIC=ON
 
@@ -320,22 +317,13 @@ GLFW_LIBRARY_TYPE:STRING=
 GLFW_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glfw
 
 //Include for OpenGL on OS X
-OPENGL_INCLUDE_DIR:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
+OPENGL_INCLUDE_DIR:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework
 
 //OpenGL library for OS X
-OPENGL_gl_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
+OPENGL_gl_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework
 
 //GLU library for OS X (usually same as OpenGL library)
-OPENGL_glu_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework
-
-//Value Computed by CMake
-OpenGL_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
-
-//Value Computed by CMake
-OpenGL_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-OpenGL_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet
+OPENGL_glu_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework
 
 //Value Computed by CMake
 glad_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build/libs/glad
@@ -344,7 +332,7 @@ glad_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/buil
 glad_IS_TOP_LEVEL:STATIC=OFF
 
 //Dependencies for the target
-glad_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
+glad_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework;
 
 //Value Computed by CMake
 glad_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glad
@@ -365,7 +353,7 @@ stb_BINARY_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/build
 stb_IS_TOP_LEVEL:STATIC=OFF
 
 //Dependencies for the target
-stb_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework;
+stb_LIB_DEPENDS:STATIC=general;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework;
 
 //Value Computed by CMake
 stb_SOURCE_DIR:STATIC=/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb
@@ -549,7 +537,7 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 //Details about finding OpenGL
-FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk/System/Library/Frameworks/OpenGL.framework][c ][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework][/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/OpenGL.framework][c ][v()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //GLFW pkg-config Libs.private

@@ -6,7 +6,7 @@ C_DEFINES =
 
 C_INCLUDES = -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/src -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glad/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glm/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/glfw/include -I/Users/max/Documents/c++/openGL/Capybara-Desktop-Pet/libs/stb/include
 
-C_FLAGSarm64 =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0
+C_FLAGSarm64 =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 
-C_FLAGS =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.0
+C_FLAGS =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 
