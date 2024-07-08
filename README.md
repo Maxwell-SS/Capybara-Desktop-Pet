@@ -12,7 +12,7 @@
 
 ## Showcase
 <div align="center">
-  <img src="res/readme/showcase.gif" alt="Capybara Running">
+  <img src="res/readme/gif.gif" alt="Capybara Running">
 </div>
 
 ## About The Project
