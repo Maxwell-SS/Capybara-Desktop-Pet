@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 set(CMAKE_CXX_STANDARD 20)
 project(Capybara)
 
-option(BUILD_BUNDLE "Build as a macOS Application Bundle" ON)
+option(BUILD_BUNDLE "Build as a macOS Application Bundle" OFF)
 
 if(BUILD_BUNDLE)
 	set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Bundle)
